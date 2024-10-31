@@ -5,12 +5,11 @@ import { getEnergyDataById } from "../api/energyApi";
 const EnergyDetail = () => {
   const { id } = useParams();
   const [energyData, setEnergyData] = useState(null);
+  const [ratePerKWh, setRatePerKWh] = useState(0.1); // Default rate per kWh
 
   useEffect(() => {
     getEnergyDataById(id)
-      .then((res) => {
-        setEnergyData(res.data);
-      })
+      .then((res) => setEnergyData(res.data))
       .catch((error) => console.error(error));
   }, [id]);
 
@@ -18,9 +17,8 @@ const EnergyDetail = () => {
     return <div>Loading...</div>;
   }
 
-  const calculateEnergyCost = (watt, hours) => {
-    const ratePerKWh = 0.1; // Example electricity rate per kWh
-    return ((watt / 1000) * hours * ratePerKWh).toFixed(2);
+  const calculateEnergyCost = (watt, hours, rate) => {
+    return ((watt / 1000) * hours * rate).toFixed(2);
   };
 
   return (
@@ -39,9 +37,27 @@ const EnergyDetail = () => {
         <p className="text-sm text-gray-600">
           <span className="font-semibold">Tanggal:</span> {energyData.date}
         </p>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Tarif per kWh:
+          </label>
+          <input
+            type="number"
+            value={ratePerKWh}
+            onChange={(e) => setRatePerKWh(parseFloat(e.target.value))}
+            className="input"
+            step="0.01"
+          />
+        </div>
+
         <p className="text-sm text-gray-500">
-          <span className="font-semibold">Estimasi Biaya:</span> $
-          {calculateEnergyCost(energyData.watt, energyData.usageHours)}
+          <span className="font-semibold">Estimasi Biaya:</span> ${" "}
+          {calculateEnergyCost(
+            energyData.watt,
+            energyData.usageHours,
+            ratePerKWh
+          )}
         </p>
         <p className="text-sm text-green-600 italic">{energyData.tips}</p>
         <Link
