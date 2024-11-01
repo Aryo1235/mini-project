@@ -1,7 +1,7 @@
-// src/components/EditEnergyForm.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getEnergyDataById, updateEnergyData } from "../api/energyApi";
+import { Datepicker } from "flowbite-react"; // Import Datepicker dari Flowbite
 
 const EditEnergyForm = () => {
   const { id } = useParams();
@@ -26,6 +26,14 @@ const EditEnergyForm = () => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  const handleDateChange = (date) => {
+    const formattedDate = date ? date.toLocaleDateString("en-CA") : ""; // Menggunakan 'en-CA' untuk format YYYY-MM-DD
+    setFormData((prevData) => ({
+      ...prevData,
+      date: formattedDate,
     }));
   };
 
@@ -77,12 +85,10 @@ const EditEnergyForm = () => {
         </div>
         <div>
           <label className="block text-sm font-medium">Tanggal</label>
-          <input
-            type="date" // Menggunakan input tipe date
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-md"
+          <Datepicker
+            selected={formData.date} // Tampilkan nilai awal dari formData.date
+            onChange={handleDateChange} // Menggunakan handleDateChange untuk pembaruan state
+            placeholderText="Pilih Tanggal"
           />
         </div>
         <div>
@@ -103,7 +109,7 @@ const EditEnergyForm = () => {
         </button>
         <button
           type="button"
-          onClick={() => navigate(`/detail/${id}`)} // Tambahkan navigasi ke halaman detail
+          onClick={() => navigate(`/detail/${id}`)}
           className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
         >
           Detail

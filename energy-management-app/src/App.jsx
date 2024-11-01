@@ -1,18 +1,21 @@
 // src/App.js
-import React from "react";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+
 import EnergyList from "./components/EnergyList";
 import AddEnergyForm from "./components/AddEnergyForm";
 import EditEnergyForm from "./components/EditEnergyForm";
 import EnergyDetail from "./components/EnergyDetail";
+import Navbars from "./components/Navbar";
 
 function App() {
   return (
     <Router>
-      <Navbar />
+      <Navbars />
+
       <Routes>
         <Route path="/" element={<EnergyList />} />
+
         <Route path="/:id" element={<EnergyDetail />} />
         <Route path="/add" element={<AddEnergyForm />} />
         <Route path="/edit/:id" element={<EditEnergyForm />} />

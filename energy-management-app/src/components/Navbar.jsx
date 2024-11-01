@@ -1,25 +1,25 @@
-// src/components/Navbar.jsx
-import React from "react";
-import { Link } from "react-router-dom";
+"use client";
 
-const Navbar = () => {
+import { Link, NavLink } from "react-router-dom";
+import { Navbar } from "flowbite-react";
+
+export default function Navbars() {
   return (
-    <nav className="bg-blue-500 p-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-white text-2xl font-semibold">
-          Energy Manager
-        </Link>
-        <div>
-          <Link to="/" className="text-white mr-4 hover:text-blue-200">
-            Home
-          </Link>
-          <Link to="/add" className="text-white hover:text-blue-200">
-            Add Energy
-          </Link>
-        </div>
-      </div>
-    </nav>
+    <Navbar fluid rounded className="sticky top-0 shadow-md z-10">
+      <Navbar.Brand as={Link} href="https://flowbite-react.com">
+        <img
+          src="/favicon.svg"
+          className="mr-3 h-6 sm:h-9"
+          alt="Flowbite React Logo"
+        />
+        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+          Flowbite React
+        </span>
+      </Navbar.Brand>
+      <Navbar.Toggle />
+      <Navbar.Collapse>
+        <Navbar.Link></Navbar.Link>
+      </Navbar.Collapse>
+    </Navbar>
   );
-};
-
-export default Navbar;
+}

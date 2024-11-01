@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getEnergyData, deleteEnergyData } from "../api/energyApi";
 import FilterAndSort from "./FilterAndSort";
+import { Button, Card, Pagination } from "flowbite-react";
 
 const EnergyList = () => {
   const [energyData, setEnergyData] = useState([]);
@@ -9,15 +10,20 @@ const EnergyList = () => {
   const [filterDevice, setFilterDevice] = useState("");
   const [sortOption, setSortOption] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12; // Jumlah item per halaman
+  const [loading, setLoading] = useState(true);
+  const itemsPerPage = 12;
   const navigate = useNavigate();
 
   useEffect(() => {
     getEnergyData()
       .then((res) => {
         setEnergyData(res.data);
+        setLoading(false);
       })
-      .catch((error) => console.error("Error fetching energy data:", error));
+      .catch((error) => {
+        console.error("Error fetching energy data:", error);
+        setLoading(false);
+      });
   }, []);
 
   const handleDelete = (id) => {
@@ -47,7 +53,6 @@ const EnergyList = () => {
       return 0;
     });
 
-  // Menghitung data yang ditampilkan berdasarkan halaman saat ini
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredAndSortedData.slice(
@@ -55,13 +60,11 @@ const EnergyList = () => {
     indexOfLastItem
   );
 
-  // Menghitung jumlah halaman
   const totalPages = Math.ceil(filteredAndSortedData.length / itemsPerPage);
 
-  // Handle filterDevice change to reset to first page
   const handleFilterDeviceChange = (device) => {
     setFilterDevice(device);
-    setCurrentPage(1); // Reset to first page when filter changes
+    setCurrentPage(1);
   };
 
   return (
@@ -70,73 +73,84 @@ const EnergyList = () => {
         Daftar Konsumsi Energi
       </h2>
 
+      {/* Flex Container for Filter and Add Button */}
+
       <FilterAndSort
         setFilterDate={setFilterDate}
-        setFilterDevice={handleFilterDeviceChange} // Use the new function
+        setFilterDevice={handleFilterDeviceChange}
         setSortOption={setSortOption}
       />
+
       <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-        {currentItems.map((item) => (
-          <li
-            key={item.id}
-            className="p-4 border rounded-md shadow-sm bg-gray-50 cursor-pointer"
-            onClick={() => navigate(`/${item.id}`)}
-          >
-            <div>
-              <h3 className="text-lg font-bold text-green-700">
-                {item.device}
-              </h3>
-              <p className="text-sm text-gray-600">
-                <span className="font-semibold">Tanggal:</span> {item.date}
-              </p>
-              <p className="text-gray-600">
-                <span className="font-semibold">Konsumsi:</span> {item.watt}W,{" "}
-                {item.usageHours} jam
-              </p>
-            </div>
-            <div className="flex space-x-2 mt-4">
-              <Link
-                to={`/edit/${item.id}`}
-                className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-400"
-                onClick={(e) => e.stopPropagation()}
+        {loading
+          ? Array.from({ length: itemsPerPage }).map((_, index) => (
+              <div
+                key={index}
+                className="p-4 border rounded-lg shadow-md animate-pulse h-56 space-y-6"
               >
-                Edit
-              </Link>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDelete(item.id);
-                }}
-                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-400"
+                <div className="h-4 py-3 bg-gray-300 rounded w-3/4 mb-2"></div>
+                <div className="h-4  py-3 bg-gray-300 rounded w-1/2 mb-4"></div>
+                <div className="h-4 py-3 bg-gray-300 rounded w-5/6 mb-4"></div>
+                <div className="flex space-x-2 mt-4">
+                  <div className="h-8 py-5 bg-gray-300 rounded w-14"></div>
+                  <div className="h-8 py-5 bg-gray-300 rounded w-16"></div>
+                </div>
+              </div>
+            ))
+          : currentItems.map((item) => (
+              <Card
+                key={item.id}
+                className="cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
               >
-                Delete
-              </button>
-            </div>
-          </li>
-        ))}
+                <h3 className="text-lg font-bold text-green-800">
+                  {item.device}
+                </h3>
+                <p className="text-sm text-gray-700">
+                  <span className="font-semibold">Tanggal:</span> {item.date}
+                </p>
+                <p className="text-gray-700">
+                  <span className="font-semibold">Konsumsi:</span> {item.watt}W,{" "}
+                  {item.usageHours} jam
+                </p>
+                <div className="flex justify-between items-center mt-4">
+                  <div className="flex space-x-2">
+                    <Button
+                      outline
+                      gradientDuoTone="greenToBlue"
+                      className="transition-colors duration-300"
+                    >
+                      <Link
+                        to={`/edit/${item.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Edit
+                      </Link>
+                    </Button>
+                    <Button
+                      outline
+                      gradientDuoTone="pinkToOrange"
+                      size="sm"
+                      className="transition-colors duration-300"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(item.id);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            ))}
       </ul>
 
-      {/* Pagination Controls */}
-      <div className="flex justify-between mt-4">
-        <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
-        >
-          Sebelumnya
-        </button>
-        <span>
-          Halaman {currentPage} dari {totalPages}
-        </span>
-        <button
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
-          disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
-        >
-          Berikutnya
-        </button>
+      {/* Flowbite Pagination */}
+      <div className="flex justify-center mt-6">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
       </div>
     </div>
   );
