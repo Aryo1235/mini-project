@@ -5,7 +5,7 @@ import { Navbar } from "flowbite-react";
 
 export default function Navbars() {
   return (
-    <Navbar fluid rounded className="sticky top-0 shadow-md z-10">
+    <Navbar fluid rounded className="sticky top-0 shadow-md z-20">
       <Navbar.Brand as={Link} href="https://flowbite-react.com">
         <img
           src="/favicon.svg"
