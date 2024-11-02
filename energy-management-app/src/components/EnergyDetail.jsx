@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getEnergyDataById } from "../api/energyApi";
+import { getEnergyDataById } from "../utils/energyApi";
 import { Card, Button } from "flowbite-react";
 
 const EnergyDetail = () => {

@@ -2,7 +2,7 @@
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import EnergyList from "./components/EnergyList";
+import EnergyList from "./pages/EnergyList";
 import AddEnergyForm from "./components/AddEnergyForm";
 import EditEnergyForm from "./components/EditEnergyForm";
 import EnergyDetail from "./components/EnergyDetail";

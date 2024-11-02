@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addEnergyData } from "../api/energyApi";
+import { addEnergyData } from "../utils/energyApi";
 import { useNavigate } from "react-router-dom";
 import { TextInput, Button, Label } from "flowbite-react";
 

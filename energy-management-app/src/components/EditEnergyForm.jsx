@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getEnergyDataById, updateEnergyData } from "../api/energyApi";
+import { getEnergyDataById, updateEnergyData } from "../utils/energyApi";
 import { Datepicker } from "flowbite-react"; // Import Datepicker dari Flowbite
 
 const EditEnergyForm = () => {

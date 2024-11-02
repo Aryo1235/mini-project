@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { getEnergyData, deleteEnergyData } from "../api/energyApi";
-import FilterAndSort from "./FilterAndSort";
-import SkeletonCard from "./SkeletonCard";
-import EnergyCard from "./EnergyCard";
-import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import { getEnergyData, deleteEnergyData } from "../utils/energyApi";
+import FilterAndSort from "../components/FilterAndSort";
+import SkeletonCard from "../components/SkeletonCard";
+import EnergyCard from "../components/EnergyCard";
+import DeleteConfirmationModal from "../components/DeleteConfirmationModal";
 import { Pagination, Toast } from "flowbite-react";
 import { HiCheckCircle } from "react-icons/hi";
+import { getFilteredAndSortedData } from "../utils/getFilteredAndSortedData";
 
 const EnergyList = () => {
   const [energyData, setEnergyData] = useState([]);
@@ -59,21 +60,13 @@ const EnergyList = () => {
     setItemToDelete(null);
   };
 
-  // Apply filters and sorting
-  const filteredAndSortedData = energyData
-    .filter((item) => (filterDate ? item.date === filterDate : true))
-    .filter((item) =>
-      filterDevice.length >= 2
-        ? item.device.toLowerCase().includes(filterDevice.toLowerCase())
-        : true
-    )
-    .sort((a, b) => {
-      if (sortOption === "watt-asc") return a.watt - b.watt;
-      if (sortOption === "watt-desc") return b.watt - a.watt;
-      if (sortOption === "duration-asc") return a.usageHours - b.usageHours;
-      if (sortOption === "duration-desc") return b.usageHours - a.usageHours;
-      return 0;
-    });
+  // Panggil fungsi utility
+  const filteredAndSortedData = getFilteredAndSortedData(
+    energyData,
+    filterDate,
+    filterDevice,
+    sortOption
+  );
 
   const currentItems = filteredAndSortedData.slice(
     (currentPage - 1) * itemsPerPage,
