@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getEnergyData, deleteEnergyData } from "../utils/energyApi";
-import FilterAndSort from "../components/FilterAndSort";
-import SkeletonCard from "../components/SkeletonCard";
 import EnergyCard from "../components/EnergyCard";
-import DeleteConfirmationModal from "../components/DeleteConfirmationModal";
+import SkeletonCard from "../components/SkeletonCard";
+import FilterAndSort from "../components/FilterAndSort";
+import DeleteConfirmationModal from "../components/DeleteConfirmModal";
 import { Pagination, Toast } from "flowbite-react";
 import { HiCheckCircle } from "react-icons/hi";
 import { getFilteredAndSortedData } from "../utils/getFilteredAndSortedData";
