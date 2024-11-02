@@ -8,6 +8,7 @@ const EditEnergyForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     device: "",
+    stasus: "",
     watt: "",
     usageHours: "",
     tips: "",
@@ -60,6 +61,19 @@ const EditEnergyForm = () => {
             onChange={handleChange}
             className="w-full p-2 border rounded-md"
           />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Status</label>
+          <select
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            className="w-full p-2 border rounded-md"
+          >
+            <option value="">Pilih Status</option>
+            <option value="Aktif">Aktif</option>
+            <option value="Tidak Aktif">Tidak Aktif</option>
+          </select>
         </div>
         <div>
           <label className="block text-sm font-medium">Watt (W)</label>

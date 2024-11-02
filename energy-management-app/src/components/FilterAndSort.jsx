@@ -11,11 +11,11 @@ const FilterAndSort = ({ setFilterDate, setFilterDevice, setSortOption }) => {
   };
 
   return (
-    <div className="mb-4 flex  justify-between ">
-      <div className="flex space-x-2">
+    <div className="mb-4 flex flex-col lg:flex-row lg:justify-between">
+      <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2 w-full lg:w-auto">
         <Datepicker
           onChange={handleDateChange}
-          className="w-48 cursor-pointer"
+          className="w-full lg:w-48 cursor-pointer"
           placeholder="Pilih Tanggal"
         />
 
@@ -24,12 +24,19 @@ const FilterAndSort = ({ setFilterDate, setFilterDevice, setSortOption }) => {
           type="text"
           placeholder="Cari nama perangkat"
           onChange={(e) => setFilterDevice(e.target.value)}
+          className="w-full lg:w-48"
         />
 
         {/* Dropdown untuk pengurutan */}
         <Dropdown label="Urutkan" color="info" size="sm">
           <Dropdown.Item onClick={() => setSortOption("")}>
             Default (Terbaru)
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setSortOption("status-asc")}>
+            Status (Aktif)
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setSortOption("status-desc")}>
+            Status (Tidak Aktif)
           </Dropdown.Item>
           <Dropdown.Item onClick={() => setSortOption("watt-asc")}>
             Watt (Rendah ke Tinggi)
@@ -45,7 +52,8 @@ const FilterAndSort = ({ setFilterDate, setFilterDevice, setSortOption }) => {
           </Dropdown.Item>
         </Dropdown>
       </div>
-      <Button gradientMonochrome="success">
+
+      <Button gradientMonochrome="success" className="mt-4 lg:mt-0">
         <Link to="/add">Tambah Data</Link>
       </Button>
     </div>

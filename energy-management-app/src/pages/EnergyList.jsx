@@ -19,7 +19,7 @@ const EnergyList = () => {
   const [itemToDelete, setItemToDelete] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const itemsPerPage = 12;
-
+  console.log("energyData", energyData);
   useEffect(() => {
     getEnergyData()
       .then((res) => {

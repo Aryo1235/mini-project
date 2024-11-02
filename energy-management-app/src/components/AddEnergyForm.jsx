@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { addEnergyData } from "../utils/energyApi";
 import { useNavigate } from "react-router-dom";
-import { TextInput, Button, Label } from "flowbite-react";
+import { TextInput, Button, Label, Select } from "flowbite-react";
 
 const AddEnergyForm = () => {
   const [form, setForm] = useState({
     device: "",
+    status: "",
     watt: "",
     usageHours: "",
     tips: "",
@@ -42,6 +43,14 @@ const AddEnergyForm = () => {
             onChange={handleChange}
             required
           />
+        </div>
+        <div className="mb-4">
+          <Label htmlFor="status" value="Status" />
+          <Select name="status" value={form.status} onChange={handleChange}>
+            <option value="">Pilih Status</option>
+            <option value="Aktif">Aktif</option>
+            <option value="Tidak Aktif">Tidak Aktif</option>
+          </Select>
         </div>
         <div className="mb-4">
           <Label htmlFor="watt" value="Watt" />
@@ -89,9 +98,22 @@ const AddEnergyForm = () => {
             required
           />
         </div>
-        <Button type="submit" className="w-full" gradientDuoTone="greenToBlue">
-          Add
-        </Button>
+        <div className="flex justify-between space-x-10">
+          <Button
+            onClick={() => navigate("/")}
+            className="w-full"
+            gradientDuoTone="purpleToBlue"
+          >
+            Kembali
+          </Button>
+          <Button
+            type="submit"
+            className="w-full"
+            gradientDuoTone="greenToBlue"
+          >
+            Add
+          </Button>
+        </div>
       </form>
     </div>
   );

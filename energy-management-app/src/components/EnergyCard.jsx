@@ -1,20 +1,48 @@
 // EnergyCard.js
-import { Link } from "react-router-dom";
-import { Button, Card } from "flowbite-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Card, Badge } from "flowbite-react";
+import { FaCalendarAlt, FaBolt } from "react-icons/fa"; // Import ikon
 
 const EnergyCard = ({ item, onDelete }) => {
+  const navigate = useNavigate();
+  const statusColor = item.status === "Aktif" ? "success" : "failure";
+
   return (
-    <Card className="cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg">
-      <h3 className="text-lg font-bold text-green-800">{item.device}</h3>
-      <p className="text-sm text-gray-700">
-        <span className="font-semibold">Tanggal:</span> {item.date}
+    <Card
+      className="cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg 
+        bg-gradient-to-br from-green-200 to-blue-100 rounded-lg shadow-md p-5"
+      onClick={() => navigate(`/detail/${item.id}`)}
+    >
+      {/* Header Device */}
+      <h3 className="font-serif text-lg font-bold text-cyan-700 mb-2 flex items-center justify-center">
+        {item.device}
+      </h3>
+
+      {/* Status */}
+      <Badge
+        color={statusColor}
+        className="text-sm font-semibold w-32"
+        size="sm"
+      >
+        Status: {item.status}
+      </Badge>
+
+      {/* Date */}
+      <p className="text-sm text-gray-700 mb-1 flex items-center">
+        <FaCalendarAlt className="mr-2" />
+        <span className="font-semibold">Tanggal :</span> {item.date}
       </p>
-      <p className="text-gray-700">
-        <span className="font-semibold">Konsumsi:</span> {item.watt}W,{" "}
-        {item.usageHours} jam
+
+      {/* Consumption Info */}
+      <p className="text-gray-700 mb-2 flex items-center">
+        <FaBolt className="mr-2" />
+        <span className="font-semibold mr-1">Konsumsi :</span>
+        <span>{item.watt}W</span>, {item.usageHours} jam
       </p>
-      <div className="flex justify-between items-center mt-4">
-        <div className="flex space-x-2">
+
+      {/* Action Buttons */}
+      <div className="flex  items-center mt-3">
+        <div className="flex justify-between space-x-2">
           <Button outline gradientDuoTone="greenToBlue">
             <Link to={`/edit/${item.id}`} onClick={(e) => e.stopPropagation()}>
               Edit
@@ -25,7 +53,7 @@ const EnergyCard = ({ item, onDelete }) => {
             gradientDuoTone="pinkToOrange"
             size="sm"
             onClick={(e) => {
-              e.stopPropagation();
+              e.stopPropagation(); // Prevent triggering card click
               onDelete(item.id);
             }}
           >
