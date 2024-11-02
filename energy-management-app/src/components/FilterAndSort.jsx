@@ -30,7 +30,7 @@ const FilterAndSort = ({ setFilterDate, setFilterDevice, setSortOption }) => {
         {/* Dropdown untuk pengurutan */}
         <Dropdown label="Urutkan" color="info" size="sm">
           <Dropdown.Item onClick={() => setSortOption("")}>
-            Default (Terbaru)
+            Default
           </Dropdown.Item>
           {/* <Dropdown.Item onClick={() => setSortOption("status-asc")}>
             Status (Aktif)
