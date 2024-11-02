@@ -32,12 +32,12 @@ const FilterAndSort = ({ setFilterDate, setFilterDevice, setSortOption }) => {
           <Dropdown.Item onClick={() => setSortOption("")}>
             Default (Terbaru)
           </Dropdown.Item>
-          <Dropdown.Item onClick={() => setSortOption("status-asc")}>
+          {/* <Dropdown.Item onClick={() => setSortOption("status-asc")}>
             Status (Aktif)
           </Dropdown.Item>
           <Dropdown.Item onClick={() => setSortOption("status-desc")}>
             Status (Tidak Aktif)
-          </Dropdown.Item>
+          </Dropdown.Item> */}
           <Dropdown.Item onClick={() => setSortOption("watt-asc")}>
             Watt (Rendah ke Tinggi)
           </Dropdown.Item>
