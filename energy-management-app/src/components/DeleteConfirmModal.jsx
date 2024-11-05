@@ -6,7 +6,9 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
     <Modal show={isOpen} onClose={onClose}>
       <Modal.Header>Konfirmasi Penghapusan</Modal.Header>
       <Modal.Body>
-        <p>Apakah Anda yakin ingin menghapus data ini?</p>
+        <p className="dark:text-white">
+          Apakah Anda yakin ingin menghapus data ini?
+        </p>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={onConfirm} color="red">

@@ -21,7 +21,7 @@ const EnergyCard = ({ item, onDelete }) => {
       {/* Status */}
       <Badge
         color={statusColor}
-        className="text-sm font-semibold w-32"
+        className="text-sm font-semibold w-36"
         size="sm"
       >
         Status: {item.status}

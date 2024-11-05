@@ -4,7 +4,7 @@ import EnergyCard from "../components/EnergyCard";
 import SkeletonCard from "../components/SkeletonCard";
 import FilterAndSort from "../components/FilterAndSort";
 import DeleteConfirmationModal from "../components/DeleteConfirmModal";
-import { Pagination, Toast } from "flowbite-react";
+import { Flowbite, Pagination, Toast } from "flowbite-react";
 import { HiCheckCircle } from "react-icons/hi";
 import { getFilteredAndSortedData } from "../utils/getFilteredAndSortedData";
 
@@ -75,58 +75,60 @@ const EnergyList = () => {
   const totalPages = Math.ceil(filteredAndSortedData.length / itemsPerPage);
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-6 text-green-600">
-        Daftar Konsumsi Energi
-      </h2>
+    <div className="min-h-screen dark:bg-gray-900">
+      <div className="container mx-auto p-4">
+        <h2 className="text-2xl font-semibold mb-6 text-green-600">
+          Daftar Konsumsi Energi
+        </h2>
 
-      {/* Filter and Sort Component */}
-      <FilterAndSort
-        setFilterDate={setFilterDate}
-        setFilterDevice={setFilterDevice}
-        setSortOption={setSortOption}
-      />
-
-      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-        {loading ? (
-          <SkeletonCard itemsPerPage={itemsPerPage} />
-        ) : (
-          currentItems.map((item) => (
-            <EnergyCard key={item.id} item={item} onDelete={handleDelete} />
-          ))
-        )}
-      </ul>
-
-      {/* Pagination */}
-      <div className="flex justify-center mt-6">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={(page) => setCurrentPage(page)}
+        {/* Filter and Sort Component */}
+        <FilterAndSort
+          setFilterDate={setFilterDate}
+          setFilterDevice={setFilterDevice}
+          setSortOption={setSortOption}
         />
-      </div>
 
-      {/* Delete Confirmation Modal */}
-      <DeleteConfirmationModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        onConfirm={confirmDelete}
-      />
+        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+          {loading ? (
+            <SkeletonCard itemsPerPage={itemsPerPage} />
+          ) : (
+            currentItems.map((item) => (
+              <EnergyCard key={item.id} item={item} onDelete={handleDelete} />
+            ))
+          )}
+        </ul>
 
-      {/* Toast Notification */}
-      {showToast && (
-        <div className="fixed bottom-4 right-4">
-          <Toast>
-            <div className="inline-flex items-center justify-center w-10 h-10 text-green-500 bg-green-100 rounded-lg">
-              <HiCheckCircle className="w-5 h-5" />
-            </div>
-            <div className="ml-3 text-sm font-normal">
-              Item berhasil dihapus.
-            </div>
-            <Toast.Toggle />
-          </Toast>
+        {/* Pagination */}
+        <div className="flex justify-center mt-6">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
         </div>
-      )}
+
+        {/* Delete Confirmation Modal */}
+        <DeleteConfirmationModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          onConfirm={confirmDelete}
+        />
+
+        {/* Toast Notification */}
+        {showToast && (
+          <div className="fixed bottom-4 right-4">
+            <Toast>
+              <div className="inline-flex items-center justify-center w-10 h-10 text-green-500 bg-green-100 rounded-lg">
+                <HiCheckCircle className="w-5 h-5" />
+              </div>
+              <div className="ml-3 text-sm font-normal">
+                Item berhasil dihapus.
+              </div>
+              <Toast.Toggle />
+            </Toast>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
