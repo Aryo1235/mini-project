@@ -10,7 +10,7 @@ const EnergyCard = ({ item, onDelete }) => {
   return (
     <Card
       className="cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg 
-        bg-gradient-to-br from-green-200 to-blue-100 rounded-lg shadow-md p-5"
+        bg-gradient-to-br from-green-300 to-blue-100 rounded-lg shadow-md p-5"
       onClick={() => navigate(`/detail/${item.id}`)}
     >
       {/* Header Device */}

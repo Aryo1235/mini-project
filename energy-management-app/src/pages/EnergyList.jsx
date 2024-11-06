@@ -75,7 +75,7 @@ const EnergyList = () => {
   const totalPages = Math.ceil(filteredAndSortedData.length / itemsPerPage);
 
   return (
-    <div className="min-h-screen dark:bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-green-100 via-transparent dark:from-green-950 dark:bg-gray-950">
       <div className="container mx-auto p-4">
         <h2 className="text-2xl font-semibold mb-6 text-green-600">
           Daftar Konsumsi Energi

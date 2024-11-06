@@ -43,7 +43,7 @@ const AddEnergyForm = () => {
   };
 
   return (
-    <div className=" min-h-screen dark:bg-gray-900 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-100 via-transparent dark:from-green-950 dark:bg-gray-950 p-4">
       {showToast && <ToastNotification message="Data berhasil ditambahkan!" />}
       <EnergyForm
         form={form}
