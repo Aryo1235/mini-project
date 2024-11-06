@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { addEnergyData } from "../utils/energyApi";
 import { useNavigate } from "react-router-dom";
+import ToastNotification from "./ToastNotification";
 import EnergyForm from "./EnergyForm";
 
 const AddEnergyForm = () => {
@@ -12,6 +13,8 @@ const AddEnergyForm = () => {
     tips: "",
     date: "",
   });
+  const [isProcessing, setIsProcessing] = useState(false); // State untuk mengelola status loading
+  const [showToast, setShowToast] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -23,13 +26,25 @@ const AddEnergyForm = () => {
     setForm((prevForm) => ({ ...prevForm, date: formattedDate }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addEnergyData(form).then(() => navigate("/"));
+    setIsProcessing(true);
+    try {
+      await addEnergyData(form); // Proses penambahan data
+      setShowToast(true); // Menampilkan toast untuk notifikasi sukses
+      setTimeout(() => setShowToast(false), 3000); // Sembunyikan notifikasi setelah 3 detik
+    } catch (error) {
+      console.error("Error saat menambahkan data energi:", error); // Log error
+
+      // Anda juga dapat menampilkan pesan error pada UI
+    } finally {
+      setIsProcessing(false); // Pastikan loading dinonaktifkan meskipun terjadi error
+    }
   };
 
   return (
-    <div className="container my-5">
+    <div className=" min-h-screen dark:bg-gray-900 p-4">
+      {showToast && <ToastNotification message="Data berhasil ditambahkan!" />}
       <EnergyForm
         form={form}
         handleChange={handleChange}
@@ -38,6 +53,7 @@ const AddEnergyForm = () => {
         buttonText="Add"
         secondaryAction={() => navigate("/")}
         secondaryButtonText="Kembali"
+        isProcessing={isProcessing} // Kirim status loading ke komponen EnergyForm
       />
     </div>
   );

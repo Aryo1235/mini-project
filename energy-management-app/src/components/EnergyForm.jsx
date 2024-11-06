@@ -10,6 +10,7 @@ const EnergyForm = ({
   buttonText,
   secondaryAction,
   secondaryButtonText,
+  isProcessing, // Terima properti isProcessing
 }) => {
   return (
     <form
@@ -99,7 +100,12 @@ const EnergyForm = ({
             {secondaryButtonText}
           </Button>
         )}
-        <Button type="submit" className="w-full" gradientDuoTone="greenToBlue">
+        <Button
+          type="submit"
+          className="w-full"
+          gradientDuoTone="greenToBlue"
+          isProcessing={isProcessing} // Menambahkan isProcessing ke tombol utama
+        >
           {buttonText}
         </Button>
       </div>

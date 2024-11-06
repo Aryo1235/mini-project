@@ -5,7 +5,7 @@ import { DarkThemeToggle, Flowbite, Navbar } from "flowbite-react";
 
 export default function Navbars() {
   return (
-    <div className="dark:bg-gray-900">
+    <div>
       <Navbar
         fluid
         className="sticky top-0 shadow-md z-20 border-b border-gray-200 dark:border-gray-700"

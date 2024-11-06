@@ -1,7 +1,6 @@
 // src/App.js
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import EnergyList from "./pages/EnergyList";
 import AddEnergyForm from "./components/AddEnergyForm";
 import EditEnergyForm from "./components/EditEnergyForm";

@@ -4,9 +4,9 @@ import EnergyCard from "../components/EnergyCard";
 import SkeletonCard from "../components/SkeletonCard";
 import FilterAndSort from "../components/FilterAndSort";
 import DeleteConfirmationModal from "../components/DeleteConfirmModal";
-import { Flowbite, Pagination, Toast } from "flowbite-react";
-import { HiCheckCircle } from "react-icons/hi";
+import { Pagination } from "flowbite-react";
 import { getFilteredAndSortedData } from "../utils/getFilteredAndSortedData";
+import ToastNotification from "../components/ToastNotification";
 
 const EnergyList = () => {
   const [energyData, setEnergyData] = useState([]);
@@ -115,19 +115,7 @@ const EnergyList = () => {
         />
 
         {/* Toast Notification */}
-        {showToast && (
-          <div className="fixed bottom-4 right-4">
-            <Toast>
-              <div className="inline-flex items-center justify-center w-10 h-10 text-green-500 bg-green-100 rounded-lg">
-                <HiCheckCircle className="w-5 h-5" />
-              </div>
-              <div className="ml-3 text-sm font-normal">
-                Item berhasil dihapus.
-              </div>
-              <Toast.Toggle />
-            </Toast>
-          </div>
-        )}
+        {showToast && <ToastNotification message="Data berhasil dihapus!" />}
       </div>
     </div>
   );
