@@ -1,17 +1,24 @@
-// src/components/Navbar.js
-
 import { Link } from "react-router-dom";
 import { DarkThemeToggle, Navbar } from "flowbite-react";
+import { useEffect, useState } from "react";
 
 export default function Navbars() {
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    // Retrieve user from localStorage
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user && user.username) {
+      setUsername(user.username);
+    }
+  }, []);
+
   return (
     <Navbar
       fluid
       className="sticky top-0 shadow-md z-20 border-b border-gray-200 dark:border-gray-700"
     >
       <Navbar.Brand as={Link} to="/">
-        {" "}
-        {/* Ubah href menjadi to untuk Link React Router */}
         <img
           src="/favicon.svg"
           className="mr-3 h-6 sm:h-9"
@@ -23,21 +30,22 @@ export default function Navbars() {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        {/* Link Navigasi */}
-        <Navbar.Link as={Link} to="/" active={window.location.pathname === "/"}>
-          Home
-        </Navbar.Link>
-        <Navbar.Link as={Link} to="/landing">
-          Landing
-        </Navbar.Link>
-        <Navbar.Link as={Link} to="/add">
-          Add
-        </Navbar.Link>
+        {/* Username Display */}
+        {username && (
+          <div className="ml-auto flex items-center space-x-4">
+            <span className="text-gray-700 dark:text-gray-200">
+              Hello, {username}
+            </span>
+            <DarkThemeToggle />
+          </div>
+        )}
 
-        {/* DarkThemeToggle di navbar */}
-        <div className="ml-auto">
-          <DarkThemeToggle />
-        </div>
+        {/* DarkThemeToggle if no user */}
+        {!username && (
+          <div className="ml-auto">
+            <DarkThemeToggle />
+          </div>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );

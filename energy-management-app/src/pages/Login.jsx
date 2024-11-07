@@ -1,74 +1,59 @@
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Button, Label, TextInput } from "flowbite-react";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { supabase } from "../utils/supabaseClient"; // Adjust this path as needed
 
-export default function Auth() {
-  const [email, setEmail] = useState("");
+export default function Login() {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isRegistering, setIsRegistering] = useState(false);
-  const [error, setError] = useState(null);
-  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate(); // Initialize navigate
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setMessage("");
+  const handleLogin = (event) => {
+    event.preventDefault();
 
-    if (isRegistering) {
-      // Register new user
-      const { user, error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-      if (error) {
-        setError(error.message);
-      } else {
-        setMessage(
-          "Registration successful! Please check your email to confirm your account."
-        );
-      }
+    // Hardcoded dummy credentials
+    const dummyUser = { username: "user", password: "user" };
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user && user.username === username && user.password === password) {
+      localStorage.setItem("isLoggedIn", true);
+      localStorage.setItem("user", JSON.stringify(dummyUser));
+      navigate("/"); // Redirect to home
+    } else if (
+      username === dummyUser.username &&
+      password === dummyUser.password
+    ) {
+      localStorage.setItem("user", JSON.stringify(dummyUser));
+      localStorage.setItem("isLoggedIn", true);
+      navigate("/"); // Redirect to home
     } else {
-      // Log in existing user
-      const { user, error } = await supabase.auth.signIn({
-        email,
-        password,
-      });
-      if (error) {
-        setError(error.message);
-      } else {
-        setMessage("Login successful!");
-        // Redirect to dashboard or another page
-        // window.location.href = "/dashboard";
-      }
+      setErrorMessage("Invalid username or password");
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen dark:bg-gray-900">
       <form
-        onSubmit={handleSubmit}
         className="flex w-full max-w-lg flex-col gap-4 p-6 bg-white rounded-lg shadow-md dark:bg-gray-800"
+        onSubmit={handleLogin}
       >
-        <h2 className="text-center text-lg font-semibold text-gray-900 dark:text-white">
-          {isRegistering ? "Register New Account" : "Login"}
-        </h2>
-
-        {error && <p className="text-red-600">{error}</p>}
-        {message && <p className="text-green-600">{message}</p>}
-
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="email" value="Your email" />
+            <Label htmlFor="username" value="Your username" />
           </div>
           <TextInput
-            id="email"
-            type="email"
-            placeholder="name@flowbite.com"
+            id="username"
+            type="text"
+            placeholder="Your Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
             shadow
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            helperText={
+              errorMessage && (
+                <span className="text-red-500">{errorMessage}</span>
+              )
+            }
           />
         </div>
         <div>
@@ -78,39 +63,15 @@ export default function Auth() {
           <TextInput
             id="password"
             type="password"
-            required
-            shadow
+            placeholder="Your Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
+            shadow
           />
         </div>
 
-        <Button type="submit">
-          {isRegistering ? "Register New Account" : "Log In"}
-        </Button>
-        <p className="text-sm text-center text-gray-600 dark:text-gray-400">
-          {isRegistering ? (
-            <>
-              Already have an account?{" "}
-              <span
-                onClick={() => setIsRegistering(false)}
-                className="text-cyan-600 cursor-pointer hover:underline dark:text-cyan-500"
-              >
-                Log In
-              </span>
-            </>
-          ) : (
-            <>
-              Dont have an account?{" "}
-              <span
-                onClick={() => setIsRegistering(true)}
-                className="text-cyan-600 cursor-pointer hover:underline dark:text-cyan-500"
-              >
-                Register
-              </span>
-            </>
-          )}
-        </p>
+        <Button type="submit">Login</Button>
       </form>
     </div>
   );
