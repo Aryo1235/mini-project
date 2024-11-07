@@ -18,8 +18,6 @@ const LoginUser = () => {
     if (error) {
       console.error("OAuth login error:", error.message);
       setErrorMessage("Failed to login with Discord");
-    } else {
-      navigate("/"); // Redirect to home page on successful login
     }
   };
 
