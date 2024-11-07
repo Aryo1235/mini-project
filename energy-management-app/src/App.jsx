@@ -8,6 +8,7 @@ import EditEnergyForm from "./components/EditEnergyForm";
 import EnergyDetail from "./components/EnergyDetail";
 import LandingPage from "./components/LandingPage";
 import Navbars from "./components/Navbar";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<EnergyList />} />
           <Route path="/landing" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/:id" element={<EnergyDetail />} />
           <Route path="/add" element={<AddEnergyForm />} />
           <Route path="/edit/:id" element={<EditEnergyForm />} />
