@@ -13,8 +13,6 @@ import Login from "./pages/Login";
 function App() {
   return (
     <Flowbite>
-      {" "}
-      {/* Bungkus aplikasi dengan Flowbite */}
       <Router>
         <Navbars />
         <Routes>
