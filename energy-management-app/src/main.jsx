@@ -6,8 +6,8 @@ import { Flowbite } from "flowbite-react";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Flowbite>
+ 
       <App />
-    </Flowbite>
+    
   </StrictMode>
 );

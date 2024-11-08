@@ -3,7 +3,7 @@
 import { Toast } from "flowbite-react";
 import { HiCheckCircle } from "react-icons/hi";
 
-const ToastNotification = ({ message, onClose }) => {
+const ToastNotification = ({ message,}) => {
   return (
     <div className="fixed bottom-5 right-5 z-50">
       <Toast>
