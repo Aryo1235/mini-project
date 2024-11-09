@@ -7,6 +7,8 @@ export const useLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
 
   const handleOAuthLogin = async () => {
@@ -19,8 +21,32 @@ export const useLogin = () => {
     }
   };
 
+  // Validasi email secara langsung ketika input berubah
+  const handleEmailChange = (value) => {
+    setEmail(value);
+    if (!value.includes("@")) {
+      setEmailError("Please enter a valid email address.");
+    } else {
+      setEmailError(""); // Kosongkan error jika valid
+    }
+  };
+
+  // Validasi password secara langsung ketika input berubah
+  const handlePasswordChange = (value) => {
+    setPassword(value);
+    if (value.length < 5) {
+      setPasswordError("Password must be at least 5 characters long.");
+    } else {
+      setPasswordError(""); // Kosongkan error jika valid
+    }
+  };
+
   const handleEmailLogin = async (e) => {
     e.preventDefault();
+
+    // Cek validasi terakhir saat submit
+    if (emailError || passwordError) return;
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -29,7 +55,7 @@ export const useLogin = () => {
       console.error("Email login error:", error.message);
       setErrorMessage("Invalid email or password");
     } else {
-      navigate("/"); // Redirect to home page on successful login
+      navigate("/"); // Redirect ke halaman utama jika login berhasil
     }
   };
 
@@ -37,10 +63,12 @@ export const useLogin = () => {
     email,
     password,
     errorMessage,
-    setEmail,
-    setPassword,
+    emailError,
+    passwordError,
     setErrorMessage,
     handleOAuthLogin,
     handleEmailLogin,
+    handleEmailChange, // Teruskan fungsi handleEmailChange
+    handlePasswordChange, // Teruskan fungsi handlePasswordChange
   };
 };
