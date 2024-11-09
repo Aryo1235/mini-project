@@ -1,20 +1,20 @@
-// components/LoginForm.jsx
 import { Button, Label, TextInput, Alert } from "flowbite-react";
 import { RiDiscordFill } from "react-icons/ri";
+
 const LoginForm = ({
   email,
   password,
   errorMessage,
   emailError,
   passwordError,
-  setEmail,
-  setPassword,
-  setErrorMessage, // pastikan properti ini ada
+  setErrorMessage,
   handleOAuthLogin,
   handleEmailLogin,
+  handleEmailChange,
+  handlePasswordChange,
 }) => {
   return (
-    <div className="flex items-center justify-center min-h-screen  dark:bg-gray-900">
+    <div className="flex items-center justify-center min-h-screen dark:bg-gray-900">
       <div className="w-full max-w-xl p-10 pb-16 bg-white rounded-lg shadow-lg dark:bg-gray-800">
         <div className="container max-w-sm">
           <h2 className="text-3xl font-semibold text-center text-gray-800 dark:text-white mb-10">
@@ -31,7 +31,7 @@ const LoginForm = ({
             size="lg"
             gradientMonochrome="purple"
             onClick={handleOAuthLogin}
-            className="w-full mb-4  flex items-center justify-center gap-2"
+            className="w-full mb-4 flex items-center justify-center gap-2"
           >
             <RiDiscordFill size={26} className="mr-2" />
             <span>Login with Discord</span>
@@ -50,7 +50,7 @@ const LoginForm = ({
                 type="email"
                 placeholder="Your email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => handleEmailChange(e.target.value)} // Gunakan handleEmailChange
                 required
                 shadow
                 className="mt-1"
@@ -70,7 +70,7 @@ const LoginForm = ({
                 type="password"
                 placeholder="Your password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => handlePasswordChange(e.target.value)} // Gunakan handlePasswordChange
                 required
                 shadow
                 className="mt-1"
