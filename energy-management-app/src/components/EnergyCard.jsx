@@ -10,7 +10,7 @@ const EnergyCard = ({ item, onDelete }) => {
   return (
     <Card
       className="cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg 
-        bg-gradient-to-br from-green-300 to-blue-100 rounded-lg shadow-md p-5"
+        bg-gradient-to-br from-green-300 to-blue-100 dark:bg-gray-700 rounded-lg shadow-md p-5"
       onClick={() => navigate(`/detail/${item.id}`)}
     >
       {/* Header Device */}
@@ -41,25 +41,24 @@ const EnergyCard = ({ item, onDelete }) => {
       </p>
 
       {/* Action Buttons */}
-      <div className="flex  items-center mt-3">
-        <div className="flex justify-between space-x-2">
-          <Button outline gradientDuoTone="greenToBlue">
-            <Link to={`/edit/${item.id}`} onClick={(e) => e.stopPropagation()}>
-              Edit
-            </Link>
-          </Button>
-          <Button
-            outline
-            gradientDuoTone="pinkToOrange"
-            size="sm"
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent triggering card click
-              onDelete(item.id);
-            }}
-          >
-            Delete
-          </Button>
-        </div>
+
+      <div className="flex space-x-2 mt-3 w-full">
+        <Button outline gradientDuoTone="greenToBlue">
+          <Link to={`/edit/${item.id}`} onClick={(e) => e.stopPropagation()}>
+            Edit
+          </Link>
+        </Button>
+        <Button
+          outline
+          gradientDuoTone="pinkToOrange"
+          size="sm"
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent triggering card click
+            onDelete(item.id);
+          }}
+        >
+          Delete
+        </Button>
       </div>
     </Card>
   );
