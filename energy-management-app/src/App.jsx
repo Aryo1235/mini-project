@@ -10,6 +10,7 @@ import LandingPage from "./components/LandingPage";
 import Navbars from "./components/Navbar";
 import Login from "./pages/Login";
 import LoginUser from "./pages/LoginUser";
+import ChatBot from "./components/Chat-Bot";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Navbars />
         <Routes>
           <Route path="/" element={<EnergyList />} />
+          <Route path="/chat" element={<ChatBot />} />
           <Route path="/landing" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/loginuser" element={<LoginUser />} />
