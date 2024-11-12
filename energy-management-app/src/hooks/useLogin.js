@@ -10,10 +10,13 @@ export const useLogin = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
-
+  console.log(email, password);
   const handleOAuthLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "discord",
+      options: {
+        redirectTo: "http://localhost:5173/home", // Redirect ke halaman /home setelah login berhasil
+      },
     });
     if (error) {
       console.error("OAuth login error:", error.message);
@@ -55,7 +58,7 @@ export const useLogin = () => {
       console.error("Email login error:", error.message);
       setErrorMessage("Invalid email or password");
     } else {
-      navigate("/"); // Redirect ke halaman utama jika login berhasil
+      navigate("/home"); // Redirect ke halaman utama jika login berhasil
     }
   };
 
