@@ -11,7 +11,7 @@ const EnergyCard = ({ item, onDelete }) => {
     <Card
       className="cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg 
         bg-gradient-to-br from-green-300 to-blue-100 dark:bg-gray-700 rounded-lg shadow-md p-5"
-      onClick={() => navigate(`/detail/${item.id}`)}
+      onClick={() => navigate(`/home/${item.id}`)}
     >
       {/* Header Device */}
       <h3 className="font-serif text-lg font-bold text-cyan-700 mb-2 flex items-center justify-center">

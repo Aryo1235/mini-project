@@ -17,11 +17,11 @@ function App() {
       <Router>
         <Navbars />
         <Routes>
-          <Route path="/" element={<EnergyList />} />
-          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/home" element={<EnergyList />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/loginuser" element={<LoginUser />} />
-          <Route path="/:id" element={<EnergyDetail />} />
+          <Route path="/home/:id" element={<EnergyDetail />} />
           <Route path="/add" element={<AddEnergyForm />} />
           <Route path="/edit/:id" element={<EditEnergyForm />} />
         </Routes>
