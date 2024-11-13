@@ -52,13 +52,9 @@ export default function NavbarsSupa() {
       className="sticky top-0 shadow-md z-20 border-b border-gray-200 dark:border-gray-700"
     >
       <Navbar.Brand as={Link} to="/">
-        <img
-          src="/favicon.svg"
-          className="mr-3 h-6 sm:h-9"
-          alt="Flowbite React Logo"
-        />
+        <img src="./public/logo.png" className="mr-1 h-9 sm:h-9 " alt="Logo" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Flowbite React
+          Eco-Watt
         </span>
       </Navbar.Brand>
       <Navbar.Toggle />

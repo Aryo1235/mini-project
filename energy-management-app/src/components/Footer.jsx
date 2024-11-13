@@ -6,13 +6,7 @@ import {
   FooterLinkGroup,
 } from "flowbite-react";
 
-import {
-  BsDribbble,
-  BsFacebook,
-  BsGithub,
-  BsInstagram,
-  BsTwitter,
-} from "react-icons/bs";
+import { BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 
 export default function SimpleFooter() {
   return (
@@ -22,9 +16,9 @@ export default function SimpleFooter() {
         <div className="flex flex-col items-center space-y-4 sm:flex-row sm:justify-between sm:space-y-0">
           <FooterBrand
             href="https://flowbite.com"
-            src="https://flowbite.com/docs/images/logo.svg"
-            alt="Eco-Friendly Logo"
-            name="Eco-Friendly"
+            src="./public/logo.png"
+            alt="Eco-Watt Logo"
+            name="Eco-Watt"
           />
           <FooterLinkGroup className="flex  space-y-0 items-center  sm:flex-row sm:space-y-0 sm:space-x-3">
             <FooterLink href="#">About</FooterLink>
