@@ -4,7 +4,7 @@ import EnergyList from "./pages/EnergyList";
 import AddEnergyForm from "./components/AddEnergyForm";
 import EditEnergyForm from "./components/EditEnergyForm";
 import EnergyDetail from "./components/EnergyDetail";
-import LandingPage from "./components/LandingPage";
+import LandingPage from "./pages/LandingPage";
 import Navbars from "./components/Navbar";
 import Login from "./pages/Login";
 import LoginUser from "./pages/LoginUser";
