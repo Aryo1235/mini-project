@@ -10,12 +10,13 @@ import Login from "./pages/Login";
 import LoginUser from "./pages/LoginUser";
 
 import ProtectedRoute from "./utils/ProtectedRoutes"; // Tambahkan ProtectedRoute
+import NavbarsSupa from "./components/NavbarSupa";
 
 function App() {
   return (
     <Flowbite>
       <Router>
-        <Navbars />
+        <NavbarsSupa />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
