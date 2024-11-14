@@ -1,9 +1,8 @@
 import { Button } from "flowbite-react";
-import FeaturesCard from "./FeaturesCard";
 
-export default function LandingPage() {
+export default function HeroSection() {
   return (
-    <div className="dark:bg-gray-900 min-h-screen">
+    <div>
       {/* Hero */}
       <div className="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/polygon-bg-element.svg')] dark:before:bg-[url('https://preline.co/assets/svg/examples-dark/polygon-bg-element.svg')] before:bg-no-repeat before:bg-top before:bg-cover before:size-full before:-z-[1] before:transform before:-translate-x-1/2">
         <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
@@ -33,8 +32,6 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
-      <FeaturesCard />
-      {/* End Hero */}
     </div>
   );
 }

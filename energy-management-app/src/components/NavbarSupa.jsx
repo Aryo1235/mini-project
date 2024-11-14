@@ -1,25 +1,25 @@
 import { Link } from "react-router-dom";
 import { DarkThemeToggle, Navbar } from "flowbite-react";
 import { useEffect, useState } from "react";
-import { supabase } from "../utils/supabaseClient"; // pastikan ini mengarah ke file supabaseClient.js
+import { supabase } from "../utils/supabaseClient";
 import { useNavigate } from "react-router-dom";
+
 export default function NavbarsSupa() {
   const [username, setUsername] = useState("");
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
+
   useEffect(() => {
-    // Mengambil session secara asinkron
     const getSession = async () => {
       const {
         data: { session },
       } = await supabase.auth.getSession();
       if (session && session.user) {
-        setUsername(session.user.email); // Mengatur username dengan email pengguna
+        setUsername(session.user.email);
       }
     };
 
-    getSession(); // Panggil fungsi getSession saat komponen di-render
+    getSession();
 
-    // Subscribing to auth state changes
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         if (session && session.user) {
@@ -35,14 +35,13 @@ export default function NavbarsSupa() {
     };
   }, []);
 
-  // Fungsi logout
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.error("Error logging out:", error.message);
     } else {
-      setUsername(""); // Hapus username saat logout
-      navigate("/loginuser"); // Redirect ke halaman login
+      setUsername("");
+      navigate("/loginuser");
     }
   };
 
@@ -51,45 +50,74 @@ export default function NavbarsSupa() {
       fluid
       className="sticky top-0 shadow-md z-20 border-b border-gray-200 dark:border-gray-700"
     >
-      <Navbar.Brand as={Link} to="/">
-        <img
-          src="/favicon.svg"
-          className="mr-3 h-6 sm:h-9"
-          alt="Flowbite React Logo"
-        />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Flowbite React
-        </span>
-      </Navbar.Brand>
-      <Navbar.Toggle />
-      <Navbar.Collapse>
-        <div className="ml-auto flex items-center space-x-4">
-          {/* Menampilkan DarkThemeToggle */}
-          <DarkThemeToggle />
+      <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-8">
+        {/* Brand */}
+        <Navbar.Brand as={Link} to="/">
+          <img src="./public/logo.png" className="h-8 sm:h-9 mr-2" alt="Logo" />
+          <span className="self-center whitespace-nowrap text-lg font-semibold dark:text-white">
+            Eco-Watt
+          </span>
+        </Navbar.Brand>
 
-          {/* Jika user login, tampilkan email dan tombol logout */}
-          {username ? (
-            <>
-              <span className="text-sm text-gray-700 dark:text-gray-300">
-                {username}
-              </span>
-              <button
-                onClick={handleLogout}
-                className="text-sm text-red-600 hover:underline dark:text-red-400"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            // Jika user belum login, tampilkan link ke halaman Login
+        {/* Right Side: DarkThemeToggle and Navbar.Toggle */}
+        <div className="flex items-center ml-auto space-x-4">
+          <DarkThemeToggle />
+          <Navbar.Toggle />
+
+          {/* Login/logout links for desktop */}
+          <div className="hidden md:flex items-center space-x-4">
             <Link
-              to="/loginuser"
-              className="text-sm text-blue-600 hover:underline dark:text-blue-400"
+              to="/chat"
+              className="text-sm text-gray-700 dark:text-gray-300"
             >
-              Login
+              Chat Bot
             </Link>
-          )}
+            {username ? (
+              <>
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                  {username}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="text-sm text-red-600 hover:underline dark:text-red-400"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/loginuser"
+                className="text-sm text-blue-600 hover:underline dark:text-blue-400"
+              >
+                Login
+              </Link>
+            )}
+          </div>
         </div>
+      </div>
+
+      {/* Collapsible menu items for mobile */}
+      <Navbar.Collapse className="md:hidden">
+        {username ? (
+          <>
+            <span className="text-sm text-gray-700 dark:text-gray-300">
+              {username}
+            </span>
+            <button
+              onClick={handleLogout}
+              className="text-sm text-red-600 hover:underline dark:text-red-400"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link
+            to="/loginuser"
+            className="text-sm text-blue-600 hover:underline dark:text-blue-400"
+          >
+            Login
+          </Link>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );
