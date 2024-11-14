@@ -67,6 +67,12 @@ export default function NavbarsSupa() {
           {/* Login/logout links for desktop */}
           <div className="hidden md:flex items-center space-x-4">
             <Link
+              to="/home"
+              className="text-sm text-gray-700 dark:text-gray-300"
+            >
+              Home
+            </Link>
+            <Link
               to="/chat"
               className="text-sm text-gray-700 dark:text-gray-300"
             >
@@ -98,6 +104,12 @@ export default function NavbarsSupa() {
 
       {/* Collapsible menu items for mobile */}
       <Navbar.Collapse className="md:hidden">
+        <Link to="/home" className="text-sm text-gray-700 dark:text-gray-300">
+          Home
+        </Link>
+        <Link to="/chat" className="text-sm text-gray-700 dark:text-gray-300">
+          Chat Bot
+        </Link>
         {username ? (
           <>
             <span className="text-sm text-gray-700 dark:text-gray-300">
