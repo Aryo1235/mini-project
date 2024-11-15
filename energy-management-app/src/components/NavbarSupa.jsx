@@ -53,7 +53,7 @@ export default function NavbarsSupa() {
       <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-8">
         {/* Brand */}
         <Navbar.Brand as={Link} to="/">
-          <img src="/public/logo.png" className="h-8 sm:h-9 mr-2" alt="Logo" />
+          <img src="/logo.png" className="h-8 sm:h-9 mr-2" alt="Logo" />
           <span className="self-center whitespace-nowrap text-lg font-semibold dark:text-white">
             Eco-Watt
           </span>
