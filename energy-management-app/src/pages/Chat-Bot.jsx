@@ -9,7 +9,6 @@ function ChatBot() {
   const [chatHistory, setChatHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const apikey = import.meta.env.VITE_API_KEY;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,7 +33,7 @@ function ChatBot() {
 Berikan jawaban yang langsung relevan dengan pertanyaan, termasuk strategi atau solusi praktis terkait efisiensi dan pengelolaan energi jika diperlukan."
 `;
 
-      const genAI = new GoogleGenerativeAI(apikey);
+      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
       const model = genAI.getGenerativeModel({
         model: "gemini-pro",
         safetySettings: [
