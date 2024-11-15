@@ -16,7 +16,7 @@ export default function SimpleFooter() {
         <div className="flex flex-col items-center space-y-4 sm:flex-row sm:justify-between sm:space-y-0">
           <FooterBrand
             href="https://flowbite.com"
-            src="./public/logo.png"
+            src="./logo.png"
             alt="Eco-Watt Logo"
             name="Eco-Watt"
           />
