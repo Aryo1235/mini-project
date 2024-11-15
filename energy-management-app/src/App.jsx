@@ -5,7 +5,7 @@ import { Flowbite } from "flowbite-react"; // Tambahkan impor Flowbite
 import EnergyList from "./pages/EnergyList";
 import AddEnergyForm from "./components/AddEnergyForm";
 import EditEnergyForm from "./components/EditEnergyForm";
-import EnergyDetail from "./components/EnergyDetail";
+import EnergyDetail from "./pages/EnergyDetail";
 import LandingPage from "./components/LandingPage";
 import Navbars from "./components/Navbar";
 import Login from "./pages/Login";
