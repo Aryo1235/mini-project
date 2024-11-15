@@ -4,12 +4,10 @@ import EnergyList from "./pages/EnergyList";
 import AddEnergyForm from "./components/AddEnergyForm";
 import EditEnergyForm from "./components/EditEnergyForm";
 import EnergyDetail from "./pages/EnergyDetail";
-import Navbars from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import LoginUser from "./pages/LoginUser";
-import ChatBot from "./components/Chat-Bot";
-
+import ChatBot from "./pages/Chat-Bot";
 import ProtectedRoute from "./utils/ProtectedRoutes"; // Tambahkan ProtectedRoute
 import NavbarsSupa from "./components/NavbarSupa";
 
@@ -31,7 +29,6 @@ function App() {
             <Route path="/chat" element={<ChatBot />} />
             {/* Route untuk halaman chatai */}
           </Route>
-
         </Routes>
       </Router>
     </Flowbite>
