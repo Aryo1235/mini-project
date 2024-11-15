@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getEnergyData, deleteEnergyData } from "../utils/energyApi";
 import EnergyCard from "../components/EnergyCard";
-import SkeletonCard from "../components/SkeletonCard";
-import FilterAndSort from "../components/FilterAndSort";
+import SkeletonCard from "../components/EnergyList/SkeletonCard";
+import FilterAndSort from "../components/EnergyList/FilterAndSort";
 import DeleteConfirmationModal from "../components/DeleteConfirmModal";
 import { Pagination } from "flowbite-react";
 import { getFilteredAndSortedData } from "../utils/getFilteredAndSortedData";
@@ -19,17 +19,22 @@ const EnergyList = () => {
   const [itemToDelete, setItemToDelete] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const itemsPerPage = 12;
+
   console.log("energyData", energyData);
+
+  // Fetch energy data when the component mounts
   useEffect(() => {
-    getEnergyData()
-      .then((res) => {
+    const fetchEnergyData = async () => {
+      try {
+        const res = await getEnergyData();
         setEnergyData(res.data);
         setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching energy data:", error);
         setLoading(false);
-      });
+      }
+    };
+    fetchEnergyData();
   }, []);
 
   const handleDelete = (id) => {
@@ -37,22 +42,22 @@ const EnergyList = () => {
     setIsModalOpen(true);
   };
 
-  const confirmDelete = () => {
-    deleteEnergyData(itemToDelete) // Langkah 1: Memanggil API untuk menghapus data
-      .then(() => {
-        // Langkah 2: Jika penghapusan berhasil
-        setEnergyData(
-          (prevData) => prevData.filter((item) => item.id !== itemToDelete) // Langkah 3: Menghapus item dari state
-        );
-        setIsModalOpen(false); // Langkah 4: Menutup modal konfirmasi
-        setItemToDelete(null); // Langkah 5: Menghapus item yang akan dihapus dari state
-        setShowToast(true); // Langkah 6: Menampilkan toast notifikasi
+  const confirmDelete = async () => {
+    try {
+      await deleteEnergyData(itemToDelete); // Langkah 1: Memanggil API untuk menghapus data
+      setEnergyData(
+        (prevData) => prevData.filter((item) => item.id !== itemToDelete) // Langkah 2: Menghapus item dari state
+      );
+      setIsModalOpen(false); // Langkah 3: Menutup modal konfirmasi
+      setItemToDelete(null); // Langkah 4: Menghapus item yang akan dihapus dari state
+      setShowToast(true); // Langkah 5: Menampilkan toast notifikasi
 
-        setTimeout(() => {
-          setShowToast(false); // Langkah 7: Menyembunyikan toast setelah 3 detik
-        }, 3000);
-      })
-      .catch((error) => console.error("Error deleting energy data:", error)); // Langkah 8: Menangani error jika penghapusan gagal
+      setTimeout(() => {
+        setShowToast(false); // Langkah 6: Menyembunyikan toast setelah 3 detik
+      }, 3000);
+    } catch (error) {
+      console.error("Error deleting energy data:", error); // Langkah 7: Menangani error jika penghapusan gagal
+    }
   };
 
   const closeModal = () => {

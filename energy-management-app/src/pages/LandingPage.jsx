@@ -1,5 +1,5 @@
-import HeroSection from "../components/HeroSection";
-import FeaturesCard from "../components/FeaturesCard";
+import HeroSection from "../components/LandingPage/HeroSection";
+import FeaturesCard from "../components/LandingPage/FeaturesCard";
 import SimpleFooter from "../components/Footer";
 export default function LandingPage() {
   return (
