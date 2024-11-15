@@ -29,8 +29,8 @@ function ChatBot() {
             `Nama Device: ${energy.device}, Daya Watt: ${energy.watt}, Tanggal Pemakaian: ${energy.date}, Durasi Pemakaian: ${energy.usageHours}`
         )
         .join("\n");
-      const filmSpecificPrompt = `"Anda adalah asisten AI dengan keahlian dalam manajemen energi listrik dan sapalah user dengan ramah. Berdasarkan data berikut: ${EnergyDataInfo}, berikan jawaban yang ramah, informatif, dan praktis terkait manajemen energi listrik untuk pertanyaan berikut: ${prompt}.
-Berikan jawaban yang langsung relevan dengan pertanyaan, termasuk strategi atau solusi praktis terkait efisiensi dan pengelolaan energi jika diperlukan."
+      const filmSpecificPrompt = `
+Anda adalah asisten AI yang ahli dalam manajemen energi listrik. Sambut pengguna dengan ramah, dan berdasarkan data berikut: ${EnergyDataInfo}, berikan jawaban yang jelas, informatif, dan praktis untuk pertanyaan: ${prompt}. Pastikan jawaban relevan dengan pertanyaan, serta berikan strategi atau solusi efisiensi energi jika diperlukan.
 `;
 
       const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
