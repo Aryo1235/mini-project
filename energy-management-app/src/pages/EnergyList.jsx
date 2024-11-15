@@ -38,21 +38,21 @@ const EnergyList = () => {
   };
 
   const confirmDelete = () => {
-    deleteEnergyData(itemToDelete)
+    deleteEnergyData(itemToDelete) // Langkah 1: Memanggil API untuk menghapus data
       .then(() => {
-        setEnergyData((prevData) =>
-          prevData.filter((item) => item.id !== itemToDelete)
+        // Langkah 2: Jika penghapusan berhasil
+        setEnergyData(
+          (prevData) => prevData.filter((item) => item.id !== itemToDelete) // Langkah 3: Menghapus item dari state
         );
-        setIsModalOpen(false);
-        setItemToDelete(null);
-        setShowToast(true);
+        setIsModalOpen(false); // Langkah 4: Menutup modal konfirmasi
+        setItemToDelete(null); // Langkah 5: Menghapus item yang akan dihapus dari state
+        setShowToast(true); // Langkah 6: Menampilkan toast notifikasi
 
-        // Hide toast after 3 seconds
         setTimeout(() => {
-          setShowToast(false);
+          setShowToast(false); // Langkah 7: Menyembunyikan toast setelah 3 detik
         }, 3000);
       })
-      .catch((error) => console.error("Error deleting energy data:", error));
+      .catch((error) => console.error("Error deleting energy data:", error)); // Langkah 8: Menangani error jika penghapusan gagal
   };
 
   const closeModal = () => {
