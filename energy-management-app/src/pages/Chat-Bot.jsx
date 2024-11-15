@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { GoogleGenerativeAI, HarmCategory } from "@google/generative-ai";
-import ReactMarkdown from "react-markdown";
+import ChatWindow from "../components/Chat-Bot/ChatWindow";
+import InputForm from "../components/Chat-Bot/InputForm";
 import { getEnergyData } from "../utils/energyApi";
 
 function ChatBot() {
@@ -8,7 +9,7 @@ function ChatBot() {
   const [chatHistory, setChatHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const inputRef = useRef(null);
+  const apikey = import.meta.env.VITE_API_KEY;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,9 +34,7 @@ function ChatBot() {
 Berikan jawaban yang langsung relevan dengan pertanyaan, termasuk strategi atau solusi praktis terkait efisiensi dan pengelolaan energi jika diperlukan."
 `;
 
-      const genAI = new GoogleGenerativeAI(
-        "AIzaSyAAmeNonOeqDm27E0_modFLcqHOesCmce4"
-      );
+      const genAI = new GoogleGenerativeAI(apikey);
       const model = genAI.getGenerativeModel({
         model: "gemini-pro",
         safetySettings: [
@@ -83,25 +82,6 @@ Berikan jawaban yang langsung relevan dengan pertanyaan, termasuk strategi atau 
     }
   };
 
-  const adjustTextareaHeight = () => {
-    const textarea = inputRef.current;
-    if (textarea) {
-      textarea.style.height = "auto";
-
-      if (textarea.scrollHeight > 80) {
-        textarea.style.height = `${80}px`;
-        textarea.style.overflowY = "auto";
-      } else {
-        textarea.style.height = `${textarea.scrollHeight}px`;
-        textarea.style.overflowY = "hidden";
-      }
-    }
-  };
-
-  useEffect(() => {
-    adjustTextareaHeight();
-  }, [prompt]);
-
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-900">
       <div className="bg-gray-100 rounded-lg shadow-lg p-6 w-full max-w-md">
@@ -110,65 +90,19 @@ Berikan jawaban yang langsung relevan dengan pertanyaan, termasuk strategi atau 
         </h1>
 
         {/* Chat Window */}
-        <div className="flex flex-col space-y-4 h-80 overflow-y-auto border border-gray-300 rounded-lg p-4 mb-4">
-          {chatHistory.length === 0 && !loading ? (
-            <p className="text-center text-gray-500">
-              Silahkan kirim pertanyaan tentang energi!
-            </p>
-          ) : (
-            chatHistory.map((chat, index) => (
-              <div key={index}>
-                {chat.role === "user" ? (
-                  <div className="text-right text-gray-700 whitespace-pre-wrap mb-2 break-words">
-                    <p className="bg-blue-200 p-2 rounded-lg inline-block max-w-full text-left break-words">
-                      {chat.parts[0].text}
-                    </p>
-                  </div>
-                ) : (
-                  <div className="text-left text-gray-700 whitespace-pre-wrap">
-                    <div className="bg-green-200 p-2 rounded-lg inline-block">
-                      <ReactMarkdown>{chat.parts[0].text}</ReactMarkdown>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))
-          )}
-          {loading && (
-            <div className="text-center text-gray-500">
-              Generating response...
-            </div>
-          )}
-        </div>
+        <ChatWindow chatHistory={chatHistory} loading={loading} />
 
         {/* Error Display */}
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-        {/* Form for Input */}
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-          <textarea
-            value={prompt}
-            onChange={(e) => {
-              setPrompt(e.target.value);
-            }}
-            onKeyDown={handleKeyDown}
-            placeholder="Tulis pertanyaan Anda"
-            className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-            disabled={loading}
-            rows="1"
-            ref={inputRef}
-          />
-
-          <button
-            type="submit"
-            disabled={loading}
-            className={`bg-blue-500 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600 transition-all duration-300 ease-in-out ${
-              loading ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-          >
-            {loading ? "Generating..." : "Submit"}
-          </button>
-        </form>
+        {/* Input Form */}
+        <InputForm
+          prompt={prompt}
+          setPrompt={setPrompt}
+          loading={loading}
+          handleSubmit={handleSubmit}
+          handleKeyDown={handleKeyDown}
+        />
 
         {/* Refresh Button */}
         <button
