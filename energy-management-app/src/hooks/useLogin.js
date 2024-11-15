@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import { useNavigate } from "react-router-dom";
+import { getRedirectURL } from "../utils/getRedirectsURL";
 
 export const useLogin = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ export const useLogin = () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "discord",
       options: {
-        redirectTo: "http://localhost:5173/home", // Redirect ke halaman /home setelah login berhasil
+        redirectTo: getRedirectURL("home"), // Redirect ke halaman /home setelah login berhasil
       },
     });
     if (error) {
