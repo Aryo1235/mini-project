@@ -44,12 +44,7 @@ const EnergyForm = ({
       </div>
       <div>
         <Label htmlFor="date" value="Tanggal" />
-        <Datepicker
-          selected={form.date}
-          onChange={handleDateChange}
-          dateFormat="yyyy-MM-dd"
-          placeholderText="YYYY-MM-DD"
-        />
+        <Datepicker selected={form.date} onChange={handleDateChange} />
       </div>
 
       <div>
