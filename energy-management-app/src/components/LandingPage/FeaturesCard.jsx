@@ -7,9 +7,9 @@ import {
 export default function FeaturesCard() {
   return (
     <div className="flex justify-center mt-12">
-      <div className="flex w-full max-w-4xl divide-x divide-gray-300">
+      <div className="flex flex-wrap w-full max-w-4xl divide-x divide-gray-300 sm:flex-col md:flex-row">
         {/* Card 1 */}
-        <div className="p-8 bg-white dark:bg-gray-900 text-center">
+        <div className="p-8 bg-white dark:bg-gray-900 text-center mb-6 sm:mb-4 md:mb-0 md:px-6 md:w-1/3">
           <HiOutlineLightningBolt className="w-10 h-10 mx-auto mb-4 text-green-500" />
           <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">
             Analisis Konsumsi Energi
@@ -21,7 +21,7 @@ export default function FeaturesCard() {
         </div>
 
         {/* Card 2 */}
-        <div className="p-8 bg-white dark:bg-gray-900 text-center">
+        <div className="p-8 bg-white dark:bg-gray-900 text-center mb-6 sm:mb-4 md:mb-0 md:px-6 md:w-1/3">
           <HiOutlineDeviceMobile className="w-10 h-10 mx-auto mb-4 text-green-500" />
           <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">
             Filter dan Sortir Data
@@ -33,7 +33,7 @@ export default function FeaturesCard() {
         </div>
 
         {/* Card 3 */}
-        <div className="p-8 bg-white dark:bg-gray-900 text-center">
+        <div className="p-8 bg-white dark:bg-gray-900 text-center md:px-6 md:w-1/3">
           <HiOutlineCog className="w-10 h-10 mx-auto mb-4 text-green-500" />
           <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">
             Pengelolaan Data Terpusat

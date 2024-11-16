@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getEnergyData, deleteEnergyData } from "../utils/energyApi";
-import EnergyCard from "../components/EnergyCard";
+import EnergyCard from "../components/EnergyList/EnergyCard";
 import SkeletonCard from "../components/EnergyList/SkeletonCard";
 import FilterAndSort from "../components/EnergyList/FilterAndSort";
 import DeleteConfirmationModal from "../components/DeleteConfirmModal";

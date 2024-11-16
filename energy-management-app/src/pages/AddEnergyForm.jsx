@@ -25,7 +25,7 @@ const AddEnergyForm = () => {
         handleDateChange={handleDateChange}
         handleSubmit={handleSubmit}
         buttonText="Add"
-        secondaryAction={() => navigate("/")}
+        secondaryAction={() => navigate("/home")}
         secondaryButtonText="Kembali"
         isProcessing={isProcessing} // Kirim status loading ke komponen EnergyForm
       />

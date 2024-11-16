@@ -25,7 +25,7 @@ const EditEnergyForm = () => {
         handleDateChange={handleDateChange}
         handleSubmit={handleSubmit}
         buttonText="Update"
-        secondaryAction={() => navigate(`/${id}`)}
+        secondaryAction={() => navigate(`/home/${id}`)}
         secondaryButtonText="Detail"
         isProcessing={isProcessing}
       />
