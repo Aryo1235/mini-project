@@ -44,7 +44,11 @@ const EnergyForm = ({
       </div>
       <div>
         <Label htmlFor="date" value="Tanggal" />
-        <Datepicker selected={form.date} onChange={handleDateChange} />
+        <Datepicker
+          selected={form.date}
+          onChange={handleDateChange}
+          minDate={new Date()}
+        />
       </div>
 
       <div>
