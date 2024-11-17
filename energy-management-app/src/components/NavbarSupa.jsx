@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { DarkThemeToggle, Navbar } from "flowbite-react";
 import { useEffect, useState } from "react";
-import { supabase } from "../utils/supabaseClient";
+import { supabase } from "../utils/ServiceSupabase/supabaseClient";
 import { useNavigate } from "react-router-dom";
 
 export default function NavbarsSupa() {

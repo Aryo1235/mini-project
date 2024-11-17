@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 
 const ChatWindow = ({ chatHistory, loading }) => {
   return (
-    <div className="flex flex-col space-y-4 h-80 overflow-y-auto border border-gray-300 rounded-lg p-4 mb-4">
+    <div className="flex flex-col space-y-4 h-80 overflow-y-auto border-2 border-gray-300 rounded-lg p-4 mb-4">
       {chatHistory.length === 0 && !loading ? (
         <p className="text-center text-gray-500">
           Silahkan kirim pertanyaan tentang energi!

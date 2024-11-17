@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getEnergyDataById } from "../utils/energyApi";
+import { getEnergyDataById } from "../utils/ServiceApi/energyApi";
 import EnergyCardDetail from "../components/EnergyDetail/EnergyCardDetail";
 import EnergyInfo from "../components/EnergyDetail/EnergyInfo";
 import GolonganSelector from "../components/EnergyDetail/GolonganSelector";

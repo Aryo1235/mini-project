@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { GoogleGenerativeAI, HarmCategory } from "@google/generative-ai";
+import { Button, Card, Alert } from "flowbite-react";
 import ChatWindow from "../components/Chat-Bot/ChatWindow";
 import InputForm from "../components/Chat-Bot/InputForm";
-import { getEnergyData } from "../utils/energyApi";
+import { handleChatSubmit } from "../utils/ServiceGemini/chatUtilsGemini";
 
 function ChatBot() {
   const [prompt, setPrompt] = useState("");
@@ -10,63 +10,16 @@ function ChatBot() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!prompt.trim()) return;
-
-    setLoading(true);
-    setError("");
-    setChatHistory((prevChatHistory) => [
-      ...prevChatHistory,
-      { role: "user", parts: [{ text: prompt }] },
-    ]);
-
-    try {
-      const EnergyData = await getEnergyData();
-      const EnergyDataInfo = EnergyData.data
-        .map(
-          (energy) =>
-            `Nama Device: ${energy.device}, Daya Watt: ${energy.watt}, Tanggal Pemakaian: ${energy.date}, Durasi Pemakaian: ${energy.usageHours}`
-        )
-        .join("\n");
-      const filmSpecificPrompt = `
-Anda adalah asisten AI yang ahli dalam manajemen energi listrik. Sambut pengguna dengan ramah, dan berdasarkan data berikut: ${EnergyDataInfo}, berikan jawaban yang jelas, informatif, dan praktis untuk pertanyaan: ${prompt}. Pastikan jawaban relevan dengan pertanyaan, serta berikan strategi atau solusi efisiensi energi jika diperlukan.
-`;
-
-      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
-      const model = genAI.getGenerativeModel({
-        model: "gemini-pro",
-        safetySettings: [
-          { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT },
-        ],
-        generationConfig: {
-          maxOutputTokens: 150,
-          temperature: 0.5,
-        },
-      });
-      const chat = model.startChat({ history: chatHistory });
-      const result = await chat.sendMessageStream(filmSpecificPrompt);
-
-      let aiResponse = "";
-      for await (const chunk of result.stream) {
-        aiResponse += chunk.text();
-      }
-
-      if (aiResponse) {
-        setChatHistory((prevChatHistory) => [
-          ...prevChatHistory,
-          { role: "model", parts: [{ text: aiResponse }] },
-        ]);
-      }
-
-      setPrompt("");
-    } catch (err) {
-      console.error(err);
-      setError("An error occurred while generating content.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const handleSubmit = (event) =>
+    handleChatSubmit({
+      event,
+      prompt,
+      setLoading,
+      setError,
+      setChatHistory,
+      chatHistory,
+      setPrompt,
+    });
 
   const handleRefresh = () => {
     setChatHistory([]);
@@ -82,19 +35,20 @@ Anda adalah asisten AI yang ahli dalam manajemen energi listrik. Sambut pengguna
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-900">
-      <div className="bg-gray-100 rounded-lg shadow-lg p-6 w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4 text-center text-blue-500">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-l from-green-200 via-transparent dark:from-green-950 dark:bg-gray-950">
+      <Card className="w-full max-w-sm md:max-w-lg p-6 rounded-none md:rounded-xl">
+        <h1 className="text-2xl font-bold mb-4 text-center text-green-600">
           AI Baruchat
         </h1>
 
-        {/* Chat Window */}
         <ChatWindow chatHistory={chatHistory} loading={loading} />
 
-        {/* Error Display */}
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+        {error && (
+          <Alert color="failure" className="mb-4">
+            <span>{error}</span>
+          </Alert>
+        )}
 
-        {/* Input Form */}
         <InputForm
           prompt={prompt}
           setPrompt={setPrompt}
@@ -103,14 +57,17 @@ Anda adalah asisten AI yang ahli dalam manajemen energi listrik. Sambut pengguna
           handleKeyDown={handleKeyDown}
         />
 
-        {/* Refresh Button */}
-        <button
+        <Button
           onClick={handleRefresh}
-          className="bg-red-500 text-white py-2 px-4 rounded-lg w-full mt-4 hover:bg-red-600 transition-all duration-300 ease-in-out"
+          outline
+          gradientMonochrome="failure"
+          className="w-full"
+          size="lg"
+          disabled={loading}
         >
           Refresh Chat
-        </button>
-      </div>
+        </Button>
+      </Card>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { addEnergyData } from "../utils/energyApi";
+import { addEnergyData } from "../utils/ServiceApi/energyApi";
 import { useState } from "react";
 
 const useAddEnergy = () => {

@@ -1,7 +1,10 @@
 // hooks/useEnergyForm.js
 
 import { useState, useEffect } from "react";
-import { getEnergyDataById, updateEnergyData } from "../utils/energyApi"; // Pastikan path sesuai
+import {
+  getEnergyDataById,
+  updateEnergyData,
+} from "../utils/ServiceApi/energyApi"; // Pastikan path sesuai
 
 // Custom hook untuk mengelola form dan pengambilan data energi
 const useEditEnergy = (id) => {

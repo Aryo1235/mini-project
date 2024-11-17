@@ -1,8 +1,8 @@
 // hooks/useLogin.js
 import { useState } from "react";
-import { supabase } from "../utils/supabaseClient";
+import { supabase } from "../utils/ServiceSupabase/supabaseClient";
 import { useNavigate } from "react-router-dom";
-import { getRedirectURL } from "../utils/getRedirectsURL";
+import { getRedirectURL } from "../utils/ServiceSupabase/getRedirectsURL";
 
 export const useLogin = () => {
   const [email, setEmail] = useState("");

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { Textarea, Button } from "flowbite-react"; // Import Flowbite React components
 
 const InputForm = ({
   prompt,
@@ -30,25 +31,27 @@ const InputForm = ({
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-      <textarea
+      <Textarea
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="Tulis pertanyaan Anda"
-        className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
         disabled={loading}
         rows="1"
         ref={inputRef}
+        className="focus:ring-2 focus:ring-blue-500 resize-none" // Flowbite Tailwind styles
       />
-      <button
+
+      <Button
         type="submit"
         disabled={loading}
-        className={`bg-blue-500 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600 transition-all duration-300 ease-in-out ${
-          loading ? "opacity-50 cursor-not-allowed" : ""
-        }`}
+        className=" w-full"
+        outline
+        gradientMonochrome="cyan"
+        size="lg"
       >
         {loading ? "Generating..." : "Submit"}
-      </button>
+      </Button>
     </form>
   );
 };

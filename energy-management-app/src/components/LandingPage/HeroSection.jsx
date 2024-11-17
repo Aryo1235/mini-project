@@ -1,4 +1,5 @@
 import { Button } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 export default function HeroSection() {
   return (
@@ -28,9 +29,11 @@ export default function HeroSection() {
           </div>
           {/* Buttons */}
           <div className="mt-8 gap-3 flex justify-center items-center text-center">
-            <Button gradientDuoTone="greenToBlue" size="xl" className="w-60">
-              Get Started
-            </Button>
+            <Link to="/loginuser">
+              <Button gradientDuoTone="greenToBlue" size="xl" className="w-60">
+                Get Started
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

@@ -8,9 +8,9 @@ import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import LoginUser from "./pages/LoginUser";
 import ChatBot from "./pages/Chat-Bot";
-import ProtectedRoute from "./utils/ProtectedRoutes"; // Tambahkan ProtectedRoute
+import ProtectedRoute from "./Routes/ProtectedRoutes"; // Tambahkan ProtectedRoute
 import NavbarsSupa from "./components/NavbarSupa";
-
+import SimpleFooter from "./components/Footer";
 function App() {
   return (
     <Flowbite>
@@ -30,6 +30,7 @@ function App() {
             {/* Route untuk halaman chatai */}
           </Route>
         </Routes>
+        <SimpleFooter />
       </Router>
     </Flowbite>
   );
