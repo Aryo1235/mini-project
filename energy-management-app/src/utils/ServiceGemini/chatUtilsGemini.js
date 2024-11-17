@@ -30,15 +30,21 @@ export const handleChatSubmit = async ({
           `Nama Device: ${energy.device}, Daya Watt: ${energy.watt}, Tanggal Pemakaian: ${energy.date}, Durasi Pemakaian: ${energy.usageHours}`
       )
       .join("\n");
+    const energySpecificPrompt = `
+      Kamu adalah asisten virtual yang cerdas yang siap membantu pengguna dengan pertanyaan mereka tentang perangkat dan konsumsi energi.
+      Data perangkat pengguna yang ada adalah sebagai berikut:
+      
+      ${EnergyDataInfo}
+      
+      Pengguna akan bertanya mengenai perangkat dan penggunaannya. Cobalah memberikan jawaban yang relevan dan interaktif berdasarkan pertanyaan mereka. Pastikan setiap jawaban mengarah pada percakapan lebih lanjut jika perlu.
 
-    const filmSpecificPrompt = `
-Anda adalah asisten AI yang ahli dalam manajemen energi listrik. Sambut pengguna dengan ramah, dan berdasarkan data berikut: ${EnergyDataInfo}, berikan jawaban yang jelas, informatif, dan praktis untuk pertanyaan: ${prompt}. Pastikan jawaban relevan dengan pertanyaan, serta berikan strategi atau solusi efisiensi energi jika diperlukan.
-`;
+      Pertanyaan Pengguna: "${prompt}"
+    `;
 
     // Panggil API Gemini melalui fungsi utilitas
     const aiResponse = await getGeminiResponse(
       import.meta.env.VITE_API_KEY, // API Key
-      filmSpecificPrompt, // Prompt yang dihasilkan
+      energySpecificPrompt, // Prompt yang dihasilkan
       chatHistory // Riwayat obrolan
     );
 

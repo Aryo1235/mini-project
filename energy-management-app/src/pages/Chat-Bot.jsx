@@ -38,7 +38,7 @@ function ChatBot() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-l from-green-200 via-transparent dark:from-green-950 dark:bg-gray-950">
       <Card className="w-full max-w-sm md:max-w-lg p-6 rounded-none md:rounded-xl">
         <h1 className="text-2xl font-bold mb-4 text-center text-green-600">
-          AI Baruchat
+          Eco-Ai
         </h1>
 
         <ChatWindow chatHistory={chatHistory} loading={loading} />
