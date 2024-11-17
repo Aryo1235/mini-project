@@ -3,13 +3,7 @@ import { DarkThemeToggle, Navbar } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { supabase } from "../utils/ServiceSupabase/supabaseClient";
 import { useNavigate } from "react-router-dom";
-import {
-  FaUserCircle,
-  FaHome,
-  FaComments,
-  FaSignOutAlt,
-  FaSignInAlt,
-} from "react-icons/fa";
+import { FaUserCircle, FaHome, FaComments, FaSignOutAlt } from "react-icons/fa";
 
 export default function NavbarsSupa() {
   const [username, setUsername] = useState("");
@@ -87,41 +81,33 @@ export default function NavbarsSupa() {
               Home
             </Link>
             <Link
-              to="/chat"
+              to="/home/chat"
               className="flex items-center text-sm text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400"
             >
               <FaComments className="mr-2" />
               Chat Bot
             </Link>
-            {username ? (
-              <div className="flex items-center space-x-2 relative">
-                <div
-                  onClick={toggleDropdown}
-                  className="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 cursor-pointer"
-                >
-                  <FaUserCircle className="w-6 h-6" />
-                  <span className="text-sm">{username}</span>
-                </div>
-                {isDropdownOpen && (
-                  <div className="absolute top-10 left-0 mt-2 w-40 bg-white dark:bg-gray-800 shadow-md rounded-lg py-2 z-50 ">
-                    <div
-                      onClick={handleLogout}
-                      className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100 dark:text-red-400 dark:hover:bg-gray-700 rounded-md cursor-pointer"
-                    >
-                      <FaSignOutAlt className="mr-2" />
-                      Logout
-                    </div>
-                  </div>
-                )}
+
+            <div className="flex items-center space-x-2 relative">
+              <div
+                onClick={toggleDropdown}
+                className="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 cursor-pointer"
+              >
+                <FaUserCircle className="w-6 h-6" />
+                <span className="text-sm">{username}</span>
               </div>
-            ) : (
-              <Link to="/loginuser">
-                <div className="flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-md dark:bg-green-500 dark:hover:bg-green-600">
-                  <FaSignInAlt className="mr-2" />
-                  Login
+              {isDropdownOpen && (
+                <div className="absolute top-10 left-0 mt-2 w-40 bg-white dark:bg-gray-800 shadow-md rounded-lg py-2 z-50 ">
+                  <div
+                    onClick={handleLogout}
+                    className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100 dark:text-red-400 dark:hover:bg-gray-700 rounded-md cursor-pointer"
+                  >
+                    <FaSignOutAlt className="mr-2" />
+                    Logout
+                  </div>
                 </div>
-              </Link>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -136,28 +122,20 @@ export default function NavbarsSupa() {
           Home
         </Link>
         <Link
-          to="/chat"
+          to="/home/chat"
           className="flex items-center text-sm text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400"
         >
           <FaComments className="mr-2" />
           Chat Bot
         </Link>
-        {username ? (
-          <div
-            onClick={handleLogout}
-            className="flex items-center text-sm text-red-500 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 cursor-pointer"
-          >
-            <FaSignOutAlt className="mr-2" />
-            Logout
-          </div>
-        ) : (
-          <Link to="/loginuser">
-            <div className="flex items-center text-sm text-blue-500 hover:text-blue-600 dark:text-gray-300 dark:hover:text-green-400 cursor-pointer">
-              <FaSignInAlt className="mr-2" />
-              Login
-            </div>
-          </Link>
-        )}
+
+        <div
+          onClick={handleLogout}
+          className="flex items-center text-sm text-red-500 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 cursor-pointer"
+        >
+          <FaSignOutAlt className="mr-2" />
+          Logout
+        </div>
       </Navbar.Collapse>
     </Navbar>
   );

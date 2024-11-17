@@ -54,7 +54,7 @@ const FilterAndSort = ({ setFilterDate, setFilterDevice, setSortOption }) => {
       </div>
 
       <Button gradientMonochrome="success" className="mt-4 lg:mt-0">
-        <Link to="/add">Tambah Data</Link>
+        <Link to="/home/add">Tambah Data</Link>
       </Button>
     </div>
   );

@@ -44,7 +44,10 @@ const EnergyCard = ({ item, onDelete }) => {
 
       <div className="flex space-x-2 mt-3 w-full">
         <Button outline gradientDuoTone="greenToBlue">
-          <Link to={`/edit/${item.id}`} onClick={(e) => e.stopPropagation()}>
+          <Link
+            to={`/home/edit/${item.id}`}
+            onClick={(e) => e.stopPropagation()}
+          >
             Edit
           </Link>
         </Button>
