@@ -81,14 +81,14 @@ export default function NavbarsSupa() {
           <div className="hidden md:flex items-center space-x-4 relative">
             <Link
               to="/home"
-              className="flex items-center text-sm text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+              className="flex items-center text-sm text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400"
             >
               <FaHome className="mr-2" />
               Home
             </Link>
             <Link
               to="/chat"
-              className="flex items-center text-sm text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+              className="flex items-center text-sm text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400"
             >
               <FaComments className="mr-2" />
               Chat Bot
@@ -116,7 +116,7 @@ export default function NavbarsSupa() {
               </div>
             ) : (
               <Link to="/loginuser">
-                <div className="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md dark:bg-blue-500 dark:hover:bg-blue-600">
+                <div className="flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-md dark:bg-green-500 dark:hover:bg-green-600">
                   <FaSignInAlt className="mr-2" />
                   Login
                 </div>
@@ -130,14 +130,14 @@ export default function NavbarsSupa() {
       <Navbar.Collapse className="md:hidden">
         <Link
           to="/home"
-          className="flex items-center text-sm text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+          className="flex items-center text-sm text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400"
         >
           <FaHome className="mr-2" />
           Home
         </Link>
         <Link
           to="/chat"
-          className="flex items-center text-sm text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+          className="flex items-center text-sm text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400"
         >
           <FaComments className="mr-2" />
           Chat Bot
@@ -145,14 +145,14 @@ export default function NavbarsSupa() {
         {username ? (
           <div
             onClick={handleLogout}
-            className="flex items-center text-sm text-red-500 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 cursor-pointer"
+            className="flex items-center text-sm text-red-500 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 cursor-pointer"
           >
             <FaSignOutAlt className="mr-2" />
             Logout
           </div>
         ) : (
           <Link to="/loginuser">
-            <div className="flex items-center text-sm text-blue-500 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 cursor-pointer">
+            <div className="flex items-center text-sm text-blue-500 hover:text-blue-600 dark:text-gray-300 dark:hover:text-green-400 cursor-pointer">
               <FaSignInAlt className="mr-2" />
               Login
             </div>
