@@ -3,9 +3,17 @@ import { DarkThemeToggle, Navbar } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { supabase } from "../utils/ServiceSupabase/supabaseClient";
 import { useNavigate } from "react-router-dom";
+import {
+  FaUserCircle,
+  FaHome,
+  FaComments,
+  FaSignOutAlt,
+  FaSignInAlt,
+} from "react-icons/fa";
 
 export default function NavbarsSupa() {
   const [username, setUsername] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,8 +49,13 @@ export default function NavbarsSupa() {
       console.error("Error logging out:", error.message);
     } else {
       setUsername("");
+      setIsDropdownOpen(false); // Close dropdown after logout
       navigate("/loginuser");
     }
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
@@ -64,38 +77,49 @@ export default function NavbarsSupa() {
           <DarkThemeToggle />
           <Navbar.Toggle />
 
-          {/* Login/logout links for desktop */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Login/logout links with username beside the icon */}
+          <div className="hidden md:flex items-center space-x-4 relative">
             <Link
               to="/home"
-              className="text-sm text-gray-700 dark:text-gray-300"
+              className="flex items-center text-sm text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
             >
+              <FaHome className="mr-2" />
               Home
             </Link>
             <Link
               to="/chat"
-              className="text-sm text-gray-700 dark:text-gray-300"
+              className="flex items-center text-sm text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
             >
+              <FaComments className="mr-2" />
               Chat Bot
             </Link>
             {username ? (
-              <>
-                <span className="text-sm text-gray-700 dark:text-gray-300">
-                  {username}
-                </span>
-                <button
-                  onClick={handleLogout}
-                  className="text-sm text-red-600 hover:underline dark:text-red-400"
+              <div className="flex items-center space-x-2 relative">
+                <div
+                  onClick={toggleDropdown}
+                  className="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 cursor-pointer"
                 >
-                  Logout
-                </button>
-              </>
+                  <FaUserCircle className="w-6 h-6" />
+                  <span className="text-sm">{username}</span>
+                </div>
+                {isDropdownOpen && (
+                  <div className="absolute top-10 left-0 mt-2 w-40 bg-white dark:bg-gray-800 shadow-md rounded-lg py-2 z-50 ">
+                    <div
+                      onClick={handleLogout}
+                      className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100 dark:text-red-400 dark:hover:bg-gray-700 rounded-md cursor-pointer"
+                    >
+                      <FaSignOutAlt className="mr-2" />
+                      Logout
+                    </div>
+                  </div>
+                )}
+              </div>
             ) : (
-              <Link
-                to="/loginuser"
-                className="text-sm text-blue-600 hover:underline dark:text-blue-400"
-              >
-                Login
+              <Link to="/loginuser">
+                <div className="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md dark:bg-blue-500 dark:hover:bg-blue-600">
+                  <FaSignInAlt className="mr-2" />
+                  Login
+                </div>
               </Link>
             )}
           </div>
@@ -104,30 +128,34 @@ export default function NavbarsSupa() {
 
       {/* Collapsible menu items for mobile */}
       <Navbar.Collapse className="md:hidden">
-        <Link to="/home" className="text-sm text-gray-700 dark:text-gray-300">
+        <Link
+          to="/home"
+          className="flex items-center text-sm text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+        >
+          <FaHome className="mr-2" />
           Home
         </Link>
-        <Link to="/chat" className="text-sm text-gray-700 dark:text-gray-300">
+        <Link
+          to="/chat"
+          className="flex items-center text-sm text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+        >
+          <FaComments className="mr-2" />
           Chat Bot
         </Link>
         {username ? (
-          <>
-            <span className="text-sm text-gray-700 dark:text-gray-300">
-              {username}
-            </span>
-            <button
-              onClick={handleLogout}
-              className="text-sm text-red-600 hover:underline dark:text-red-400"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <Link
-            to="/loginuser"
-            className="text-sm text-blue-600 hover:underline dark:text-blue-400"
+          <div
+            onClick={handleLogout}
+            className="flex items-center text-sm text-red-500 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 cursor-pointer"
           >
-            Login
+            <FaSignOutAlt className="mr-2" />
+            Logout
+          </div>
+        ) : (
+          <Link to="/loginuser">
+            <div className="flex items-center text-sm text-blue-500 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 cursor-pointer">
+              <FaSignInAlt className="mr-2" />
+              Login
+            </div>
           </Link>
         )}
       </Navbar.Collapse>
