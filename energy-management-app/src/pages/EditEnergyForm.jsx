@@ -18,6 +18,9 @@ const EditEnergyForm = () => {
 
   return (
     <div className="min-h-screen dark:bg-gray-900 p-4">
+      <h2 className="text-4xl font-bold mb-8 text-center text-green-600 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">
+        Edit Device
+      </h2>
       {showToast && <ToastNotification message="Data berhasil diperbarui!" />}
       <EnergyForm
         form={form}
