@@ -4,20 +4,22 @@ import { useEffect, useState } from "react";
 import { supabase } from "../utils/ServiceSupabase/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle, FaHome, FaComments, FaSignOutAlt } from "react-icons/fa";
+import { getDisplayName } from "../utils/ServiceSupabase/userUtils"; // Import fungsi utilitas
 
 export default function NavbarHome() {
   const [username, setUsername] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
   console.log(username);
+
   useEffect(() => {
     const getSession = async () => {
-      const response = await supabase.auth.getSession(); // Ambil seluruh data dari API
-      const data = response.data; // Akses properti `data` dari objek utama
-      const session = data.session; // Akses properti `session` dari objek `data`
+      const response = await supabase.auth.getSession();
+      const session = response.data?.session;
 
-      if (session && session.user) {
-        setUsername(session.user.user_metadata.full_name);
+      if (session?.user) {
+        const displayName = getDisplayName(session.user); // Gunakan fungsi utilitas
+        setUsername(displayName);
       }
     };
 
@@ -84,10 +86,10 @@ export default function NavbarHome() {
                 <span className="text-sm">{username}</span>
               </div>
               {isDropdownOpen && (
-                <div className="absolute top-10 left-0 mt-2 w-40 bg-white dark:bg-gray-800 shadow-md rounded-lg py-2 z-50 ">
+                <div className="absolute top-10 -left-2 mt-2 w-36 bg-white dark:bg-gray-800 shadow-md rounded-lg py-2 z-50 ">
                   <div
                     onClick={handleLogout}
-                    className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100 dark:text-red-400 dark:hover:bg-gray-700 rounded-md cursor-pointer"
+                    className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100 dark:text-red-400 dark:hover:bg-gray-700 rounded-sm cursor-pointer"
                   >
                     <FaSignOutAlt className="mr-2" />
                     Logout

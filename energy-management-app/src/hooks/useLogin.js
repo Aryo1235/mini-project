@@ -51,7 +51,7 @@ export const useLogin = () => {
     // Cek validasi terakhir saat submit
     if (emailError || passwordError) return;
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -59,6 +59,7 @@ export const useLogin = () => {
       console.error("Email login error:", error.message);
       setErrorMessage("Invalid email or password");
     } else {
+      console.log("Session data after email/password login:", data);
       navigate("/home"); // Redirect ke halaman utama jika login berhasil
     }
   };
