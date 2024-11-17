@@ -7,7 +7,6 @@ import HomeLayout from "./layouts/HomeLayout";
 
 // Pages
 import LandingPage from "./pages/LandingPage";
-
 import LoginUser from "./pages/LoginUser";
 import EnergyList from "./pages/EnergyList";
 import AddEnergyForm from "./pages/AddEnergyForm";
@@ -23,29 +22,27 @@ import SimpleFooter from "./components/Footer";
 
 function App() {
   return (
-    <Flowbite>
-      <Router>
-        <Routes>
-          {/* Routes untuk Landing Layout */}
-          <Route path="/" element={<LandingLayout />}>
-            <Route index element={<LandingPage />} />
-            <Route path="login" element={<LoginUser />} />
-          </Route>
+    <Router>
+      <Routes>
+        {/* Routes untuk Landing Layout */}
+        <Route path="/" element={<LandingLayout />}>
+          <Route index element={<LandingPage />} />
+          <Route path="login" element={<LoginUser />} />
+        </Route>
 
-          {/* Routes untuk Home Layout */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/home" element={<HomeLayout />}>
-              <Route index element={<EnergyList />} />
-              <Route path=":id" element={<EnergyDetail />} />
-              <Route path="add" element={<AddEnergyForm />} />
-              <Route path="edit/:id" element={<EditEnergyForm />} />
-              <Route path="chat" element={<ChatBot />} />
-            </Route>
+        {/* Routes untuk Home Layout */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/home" element={<HomeLayout />}>
+            <Route index element={<EnergyList />} />
+            <Route path=":id" element={<EnergyDetail />} />
+            <Route path="add" element={<AddEnergyForm />} />
+            <Route path="edit/:id" element={<EditEnergyForm />} />
+            <Route path="chat" element={<ChatBot />} />
           </Route>
-        </Routes>
-        <SimpleFooter />
-      </Router>
-    </Flowbite>
+        </Route>
+      </Routes>
+      <SimpleFooter />
+    </Router>
   );
 }
 
