@@ -35,7 +35,6 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/home" element={<HomeLayout />}>
             <Route index element={<EnergyList />} />
-
             <Route path=":id" element={<EnergyDetail />} />
             <Route path="add" element={<AddEnergyForm />} />
             <Route path="edit/:id" element={<EditEnergyForm />} />
