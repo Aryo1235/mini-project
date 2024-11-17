@@ -37,7 +37,7 @@ const LoginForm = ({
             <span>Login with Discord</span>
           </Button>
 
-          <div className="text-gray-500 flex items-center p-6">
+          <div className="text-gray-500 flex items-center p-4">
             <hr className="w-full border-gray-300 dark:border-gray-700 mx-3" />
             <span>or</span>
             <hr className="w-full border-gray-300 dark:border-gray-700 mx-3" />
