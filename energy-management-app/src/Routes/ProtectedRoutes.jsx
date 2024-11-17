@@ -12,7 +12,7 @@ const ProtectedRoute = () => {
         data: { session },
       } = await supabase.auth.getSession();
 
-      setIsAuthenticated(!!session);
+      setIsAuthenticated(session);
       setIsLoading(false);
     };
 

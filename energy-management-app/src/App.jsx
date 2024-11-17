@@ -7,7 +7,7 @@ import HomeLayout from "./layouts/HomeLayout";
 
 // Pages
 import LandingPage from "./pages/LandingPage";
-import Login from "./pages/Login";
+
 import LoginUser from "./pages/LoginUser";
 import EnergyList from "./pages/EnergyList";
 import AddEnergyForm from "./pages/AddEnergyForm";
@@ -29,8 +29,7 @@ function App() {
           {/* Routes untuk Landing Layout */}
           <Route path="/" element={<LandingLayout />}>
             <Route index element={<LandingPage />} />
-            <Route path="login" element={<Login />} />
-            <Route path="loginuser" element={<LoginUser />} />
+            <Route path="login" element={<LoginUser />} />
           </Route>
 
           {/* Routes untuk Home Layout */}

@@ -44,7 +44,7 @@ export default function NavbarsSupa() {
     } else {
       setUsername("");
       setIsDropdownOpen(false); // Close dropdown after logout
-      navigate("/loginuser");
+      navigate("/login");
     }
   };
 

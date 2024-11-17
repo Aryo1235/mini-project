@@ -21,7 +21,7 @@ export default function NavbarLanding() {
         <div className="flex items-center ml-auto space-x-4">
           <DarkThemeToggle /> {/* Dark Mode Toggle */}
           {/* Login Button for Desktop and Mobile */}
-          <Link to="/loginuser">
+          <Link to="/login">
             <div className="flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-md dark:bg-green-500 dark:hover:bg-green-600">
               <FaSignInAlt className="mr-2" />
               Login
