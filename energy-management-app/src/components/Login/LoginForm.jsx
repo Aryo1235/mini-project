@@ -80,7 +80,7 @@ const LoginForm = ({
               )}
             </div>
 
-            <Button type="submit" gradientMonochrome="cyan">
+            <Button size="lg" type="submit" gradientMonochrome="cyan">
               Login
             </Button>
           </form>
