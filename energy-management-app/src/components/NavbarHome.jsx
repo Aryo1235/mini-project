@@ -5,36 +5,23 @@ import { supabase } from "../utils/ServiceSupabase/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle, FaHome, FaComments, FaSignOutAlt } from "react-icons/fa";
 
-export default function NavbarsSupa() {
+export default function NavbarHome() {
   const [username, setUsername] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
-
+  console.log(username);
   useEffect(() => {
     const getSession = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+      const response = await supabase.auth.getSession(); // Ambil seluruh data dari API
+      const data = response.data; // Akses properti `data` dari objek utama
+      const session = data.session; // Akses properti `session` dari objek `data`
+
       if (session && session.user) {
-        setUsername(session.user.email);
+        setUsername(session.user.user_metadata.full_name);
       }
     };
 
     getSession();
-
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if (session && session.user) {
-          setUsername(session.user.email);
-        } else {
-          setUsername("");
-        }
-      }
-    );
-
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
   }, []);
 
   const handleLogout = async () => {
@@ -44,7 +31,7 @@ export default function NavbarsSupa() {
     } else {
       setUsername("");
       setIsDropdownOpen(false); // Close dropdown after logout
-      navigate("/loginuser");
+      navigate("/login");
     }
   };
 
