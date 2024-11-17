@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Flowbite } from "flowbite-react";
 
 // Layouts
 import LandingLayout from "./layouts/LandingLayout";
@@ -13,6 +12,7 @@ import AddEnergyForm from "./pages/AddEnergyForm";
 import EditEnergyForm from "./pages/EditEnergyForm";
 import EnergyDetail from "./pages/EnergyDetail";
 import ChatBot from "./pages/Chat-Bot";
+import Register from "./pages/RegisterUser";
 
 // Protected Route
 import ProtectedRoute from "./Routes/ProtectedRoutes";
@@ -28,6 +28,7 @@ function App() {
         <Route path="/" element={<LandingLayout />}>
           <Route index element={<LandingPage />} />
           <Route path="login" element={<LoginUser />} />
+          <Route path="register" element={<Register />} />
         </Route>
 
         {/* Routes untuk Home Layout */}

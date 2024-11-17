@@ -10,7 +10,7 @@ import { BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 
 export default function SimpleFooter() {
   return (
-    <Footer container className="rounded-none dark:bg-gray-800">
+    <Footer container className="bottom-0 rounded-none dark:bg-gray-800">
       <div className="w-full text-center space-y-4">
         {/* Footer Top Section */}
         <div className="flex flex-col items-center space-y-4 sm:flex-row sm:justify-between sm:space-y-0">

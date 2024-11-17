@@ -1,25 +1,26 @@
+// components/Register/RegisterForm.js
 import { Button, Label, TextInput, Alert } from "flowbite-react";
 import { Link } from "react-router-dom";
-import { RiDiscordFill } from "react-icons/ri";
 
-const LoginForm = ({
+const RegisterForm = ({
   email,
   password,
+  displayName,
   errorMessage,
   emailError,
   passwordError,
   setErrorMessage,
-  handleOAuthLogin,
-  handleEmailLogin,
+  handleRegister,
   handleEmailChange,
   handlePasswordChange,
+  handleDisplayNameChange,
 }) => {
   return (
     <div className="flex items-center justify-center min-h-screen dark:bg-gray-900">
       <div className="w-full max-w-xl p-10 pb-16 bg-white rounded-lg shadow-lg dark:bg-gray-800">
         <div className="container max-w-sm">
           <h2 className="text-3xl font-semibold text-center text-gray-800 dark:text-white mb-10">
-            Login to Your Account
+            Create an Account
           </h2>
 
           {errorMessage && (
@@ -28,30 +29,32 @@ const LoginForm = ({
             </Alert>
           )}
 
-          <Button
-            size="lg"
-            gradientMonochrome="purple"
-            onClick={handleOAuthLogin}
-            className="w-full mb-4 flex items-center justify-center gap-2"
-          >
-            <RiDiscordFill size={26} className="mr-2" />
-            <span>Login with Discord</span>
-          </Button>
-
-          <div className="text-gray-500 flex items-center p-4">
-            <hr className="w-full border-gray-300 dark:border-gray-700 mx-3" />
-            <span>or</span>
-            <hr className="w-full border-gray-300 dark:border-gray-700 mx-3" />
-          </div>
-
-          <form onSubmit={handleEmailLogin} className="flex flex-col gap-4">
+          <form onSubmit={handleRegister} className="flex flex-col gap-4">
+            <div>
+              <Label
+                htmlFor="displayName"
+                value="Display Name"
+                className="text-sm"
+              />
+              <TextInput
+                id="displayName"
+                type="text"
+                placeholder="Your display name"
+                value={displayName}
+                onChange={(e) => handleDisplayNameChange(e.target.value)}
+                required
+                shadow
+                className="mt-1"
+              />
+            </div>
             <div>
               <Label htmlFor="email" value="Your Email" className="text-sm" />
               <TextInput
+                id="email"
                 type="email"
                 placeholder="Your email"
                 value={email}
-                onChange={(e) => handleEmailChange(e.target.value)} // Gunakan handleEmailChange
+                onChange={(e) => handleEmailChange(e.target.value)}
                 required
                 shadow
                 className="mt-1"
@@ -71,7 +74,7 @@ const LoginForm = ({
                 type="password"
                 placeholder="Your password"
                 value={password}
-                onChange={(e) => handlePasswordChange(e.target.value)} // Gunakan handlePasswordChange
+                onChange={(e) => handlePasswordChange(e.target.value)}
                 required
                 shadow
                 className="mt-1"
@@ -82,17 +85,18 @@ const LoginForm = ({
             </div>
 
             <Button size="lg" type="submit" gradientMonochrome="cyan">
-              Login
+              Register
             </Button>
           </form>
+
           <div className="text-center mt-6">
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Belum punya akun?{" "}
+              Sudah punya akun?{" "}
               <Link
-                to="/register"
+                to="/login"
                 className="text-cyan-500 hover:underline dark:text-cyan-400"
               >
-                Register
+                Login
               </Link>
             </p>
           </div>
@@ -102,4 +106,4 @@ const LoginForm = ({
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
