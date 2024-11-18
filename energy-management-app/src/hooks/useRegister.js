@@ -60,7 +60,7 @@ export const useRegister = () => {
 
     if (error) {
       console.error("Registration error:", error.message);
-      setErrorMessage("Failed to register. Please try again.");
+      setErrorMessage(error.message);
     } else {
       // Panggil Toast Notification di komponen
       setShowToast(true);
