@@ -1,4 +1,3 @@
-// hooks/useLogin.js
 import { useState } from "react";
 import { supabase } from "../utils/ServiceSupabase/supabaseClient";
 import { useNavigate } from "react-router-dom";
@@ -10,15 +9,21 @@ export const useLogin = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [isProcessing, setisProcessing] = useState(false); // State untuk isProcessing
   const navigate = useNavigate();
+
   console.log(email, password);
+
   const handleOAuthLogin = async () => {
+    setisProcessing(true); // Mulai isProcessing
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "discord",
       options: {
         redirectTo: getRedirectURL("home"), // Redirect ke halaman /home setelah login berhasil
       },
     });
+    setisProcessing(false); // Selesai isProcessing
+
     if (error) {
       console.error("OAuth login error:", error.message);
       setErrorMessage("Failed to login with Discord");
@@ -47,14 +52,15 @@ export const useLogin = () => {
 
   const handleEmailLogin = async (e) => {
     e.preventDefault();
-
-    // Cek validasi terakhir saat submit
     if (emailError || passwordError) return;
 
+    setisProcessing(true); // Mulai isProcessing
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
+    setisProcessing(false); // Selesai isProcessing
+
     if (error) {
       console.error("Email login error:", error.message);
       setErrorMessage("Invalid email or password");
@@ -70,10 +76,11 @@ export const useLogin = () => {
     errorMessage,
     emailError,
     passwordError,
+    isProcessing, // Sertakan isProcessing di return
     setErrorMessage,
     handleOAuthLogin,
     handleEmailLogin,
-    handleEmailChange, // Teruskan fungsi handleEmailChange
-    handlePasswordChange, // Teruskan fungsi handlePasswordChange
+    handleEmailChange,
+    handlePasswordChange,
   };
 };

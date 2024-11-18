@@ -1,4 +1,3 @@
-// hooks/useRegister.js
 import { useState } from "react";
 import { supabase } from "../utils/ServiceSupabase/supabaseClient";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +9,8 @@ export const useRegister = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [isProcessing, setisProcessing] = useState(false); // Tambahkan state isProcessing
+  const [showToast, setShowToast] = useState(false); // Tambahkan state showToast
   const navigate = useNavigate();
 
   const handleEmailChange = (value) => {
@@ -43,6 +44,8 @@ export const useRegister = () => {
       return;
     }
 
+    setisProcessing(true); // Set isProcessing saat proses registrasi dimulai
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -53,11 +56,19 @@ export const useRegister = () => {
       },
     });
 
+    setisProcessing(false); // Reset isProcessing setelah proses selesai
+
     if (error) {
       console.error("Registration error:", error.message);
       setErrorMessage("Failed to register. Please try again.");
     } else {
-      navigate("/login"); // Redirect ke halaman login
+      // Panggil Toast Notification di komponen
+      setShowToast(true);
+
+      setTimeout(() => {
+        setShowToast(false); // Sembunyikan toast setelah beberapa detik
+        navigate("/login");
+      }, 3000); // 3 detik sebelum pindah ke halaman login
     }
   };
 
@@ -68,6 +79,8 @@ export const useRegister = () => {
     errorMessage,
     emailError,
     passwordError,
+    isProcessing, // Tambahkan state isProcessing
+    showToast, // Tambahkan state showToast
     setErrorMessage,
     handleRegister,
     handleEmailChange,

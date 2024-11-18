@@ -1,7 +1,7 @@
 // pages/RegisterPage.js
 import RegisterForm from "../components/Register/RegisterForm";
 import { useRegister } from "../hooks/useRegister";
-
+import ToastNotification from "../components/ToastNotification";
 const RegisterPage = () => {
   const {
     email,
@@ -10,6 +10,7 @@ const RegisterPage = () => {
     errorMessage,
     emailError,
     passwordError,
+    showToast,
     setErrorMessage,
     handleRegister,
     handleEmailChange,
@@ -18,19 +19,22 @@ const RegisterPage = () => {
   } = useRegister();
 
   return (
-    <RegisterForm
-      email={email}
-      password={password}
-      displayName={displayName}
-      errorMessage={errorMessage}
-      emailError={emailError}
-      passwordError={passwordError}
-      setErrorMessage={setErrorMessage}
-      handleRegister={handleRegister}
-      handleEmailChange={handleEmailChange}
-      handlePasswordChange={handlePasswordChange}
-      handleDisplayNameChange={handleDisplayNameChange}
-    />
+    <>
+      <RegisterForm
+        email={email}
+        password={password}
+        displayName={displayName}
+        errorMessage={errorMessage}
+        emailError={emailError}
+        passwordError={passwordError}
+        showToast={showToast}
+        setErrorMessage={setErrorMessage}
+        handleRegister={handleRegister}
+        handleEmailChange={handleEmailChange}
+        handlePasswordChange={handlePasswordChange}
+        handleDisplayNameChange={handleDisplayNameChange}
+      />
+    </>
   );
 };
 

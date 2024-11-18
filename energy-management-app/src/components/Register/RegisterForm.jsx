@@ -1,7 +1,7 @@
 // components/Register/RegisterForm.js
 import { Button, Label, TextInput, Alert } from "flowbite-react";
 import { Link } from "react-router-dom";
-
+import ToastNotification from "../ToastNotification";
 const RegisterForm = ({
   email,
   password,
@@ -9,6 +9,8 @@ const RegisterForm = ({
   errorMessage,
   emailError,
   passwordError,
+  isProcessing,
+  showToast,
   setErrorMessage,
   handleRegister,
   handleEmailChange,
@@ -84,7 +86,12 @@ const RegisterForm = ({
               )}
             </div>
 
-            <Button size="lg" type="submit" gradientMonochrome="cyan">
+            <Button
+              size="lg"
+              type="submit"
+              gradientMonochrome="cyan"
+              isProcessing={isProcessing}
+            >
               Register
             </Button>
           </form>
@@ -100,6 +107,8 @@ const RegisterForm = ({
               </Link>
             </p>
           </div>
+          {/* Tampilkan Toast Notification jika registrasi berhasil */}
+          {showToast && <ToastNotification message="Registrasi Berhasil..." />}
         </div>
       </div>
     </div>

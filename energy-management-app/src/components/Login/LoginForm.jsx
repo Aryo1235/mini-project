@@ -8,6 +8,7 @@ const LoginForm = ({
   errorMessage,
   emailError,
   passwordError,
+  isProcessing,
   setErrorMessage,
   handleOAuthLogin,
   handleEmailLogin,
@@ -32,6 +33,8 @@ const LoginForm = ({
             size="lg"
             gradientMonochrome="purple"
             onClick={handleOAuthLogin}
+            isProcessing={isProcessing}
+            disabled={isProcessing} // Tombol disabled saat isProcessing
             className="w-full mb-4 flex items-center justify-center gap-2"
           >
             <RiDiscordFill size={26} className="mr-2" />
@@ -51,10 +54,11 @@ const LoginForm = ({
                 type="email"
                 placeholder="Your email"
                 value={email}
-                onChange={(e) => handleEmailChange(e.target.value)} // Gunakan handleEmailChange
+                onChange={(e) => handleEmailChange(e.target.value)}
                 required
                 shadow
                 className="mt-1"
+                disabled={isProcessing} // Nonaktifkan input saat isProcessing
               />
               {emailError && (
                 <p className="text-red-500 text-sm">{emailError}</p>
@@ -71,20 +75,28 @@ const LoginForm = ({
                 type="password"
                 placeholder="Your password"
                 value={password}
-                onChange={(e) => handlePasswordChange(e.target.value)} // Gunakan handlePasswordChange
+                onChange={(e) => handlePasswordChange(e.target.value)}
                 required
                 shadow
                 className="mt-1"
+                disabled={isProcessing} // Nonaktifkan input saat isProcessing
               />
               {passwordError && (
                 <p className="text-red-500 text-sm">{passwordError}</p>
               )}
             </div>
 
-            <Button size="lg" type="submit" gradientMonochrome="cyan">
+            <Button
+              size="lg"
+              type="submit"
+              gradientMonochrome="cyan"
+              isProcessing={isProcessing} // Indikator isProcessing untuk tombol submit
+              disabled={isProcessing} // Nonaktifkan tombol saat isProcessing
+            >
               Login
             </Button>
           </form>
+
           <div className="text-center mt-6">
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Belum punya akun?{" "}

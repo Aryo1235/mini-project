@@ -20,7 +20,7 @@ const EnergyList = () => {
   const [showToast, setShowToast] = useState(false);
   const itemsPerPage = 12;
 
-  console.log("energyData", energyData);
+  console.log("energyData", filterDate);
 
   // Fetch energy data when the component mounts
   useEffect(() => {
@@ -74,8 +74,8 @@ const EnergyList = () => {
   );
 
   const currentItems = filteredAndSortedData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    (currentPage - 1) * itemsPerPage, //start index
+    currentPage * itemsPerPage //end index
   );
   const totalPages = Math.ceil(filteredAndSortedData.length / itemsPerPage);
 
