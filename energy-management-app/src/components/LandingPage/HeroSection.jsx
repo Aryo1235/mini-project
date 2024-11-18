@@ -29,7 +29,7 @@ export default function HeroSection() {
           </div>
           {/* Buttons */}
           <div className="mt-8 gap-3 flex justify-center items-center text-center">
-            <Link to="/loginuser">
+            <Link to="/login">
               <Button gradientDuoTone="greenToBlue" size="xl" className="w-60">
                 Get Started
               </Button>
