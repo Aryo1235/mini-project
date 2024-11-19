@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://6718aacc7fc4c5ff8f4a7ab2.mockinstance.io/energy",
+  baseURL: "https://6718aacc7fc4c5ff8f4a7ab2.mockapi.io/energy",
 });
 
 export const getEnergyData = () => instance.get("/");
