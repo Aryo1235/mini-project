@@ -1,4 +1,3 @@
-import React from "react";
 import { Label, Select } from "flowbite-react";
 
 const GolonganSelector = ({ selectedGolongan, onChange, ratePerKWh }) => {

@@ -1,5 +1,3 @@
-import React from "react";
-
 const EnergyEstimator = ({ cost }) => {
   return (
     <div className="bg-green-50 p-4 rounded-lg shadow-inner border-l-4 border-gray-500">
