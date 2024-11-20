@@ -1,7 +1,7 @@
-// components/Register/RegisterForm.js
 import { Button, Label, TextInput, Alert } from "flowbite-react";
 import { Link } from "react-router-dom";
 import ToastNotification from "../ToastNotification";
+
 const RegisterForm = ({
   email,
   password,
@@ -25,6 +25,7 @@ const RegisterForm = ({
             Create an Account
           </h2>
 
+          {/* Display Error Message */}
           {errorMessage && (
             <Alert color="failure" onDismiss={() => setErrorMessage("")}>
               {errorMessage}
@@ -32,6 +33,7 @@ const RegisterForm = ({
           )}
 
           <form onSubmit={handleRegister} className="flex flex-col gap-4">
+            {/* Display Name Input */}
             <div>
               <Label
                 htmlFor="displayName"
@@ -49,6 +51,8 @@ const RegisterForm = ({
                 className="mt-1"
               />
             </div>
+
+            {/* Email Input */}
             <div>
               <Label htmlFor="email" value="Your Email" className="text-sm" />
               <TextInput
@@ -65,6 +69,8 @@ const RegisterForm = ({
                 <p className="text-red-500 text-sm">{emailError}</p>
               )}
             </div>
+
+            {/* Password Input */}
             <div>
               <Label
                 htmlFor="password"
@@ -86,19 +92,21 @@ const RegisterForm = ({
               )}
             </div>
 
+            {/* Register Button */}
             <Button
               size="lg"
               type="submit"
               gradientMonochrome="cyan"
-              isProcessing={isProcessing} // Indikator isProcessing untuk tombol submit
+              disabled={isProcessing} // Disable button while processing
             >
-              Register
+              {isProcessing ? "Processing..." : "Register"}
             </Button>
           </form>
 
+          {/* Redirect to Login */}
           <div className="text-center mt-6">
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Sudah punya akun?{" "}
+              Already have an account?{" "}
               <Link
                 to="/login"
                 className="text-cyan-500 hover:underline dark:text-cyan-400"
@@ -107,8 +115,9 @@ const RegisterForm = ({
               </Link>
             </p>
           </div>
-          {/* Tampilkan Toast Notification jika registrasi berhasil */}
-          {showToast && <ToastNotification message="Registrasi Berhasil..." />}
+
+          {/* Toast Notification */}
+          {showToast && <ToastNotification message="Registration Successful!" />}
         </div>
       </div>
     </div>
