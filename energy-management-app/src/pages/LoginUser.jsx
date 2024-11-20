@@ -1,6 +1,5 @@
 // pages/LoginPage.js
 import LoginForm from "../components/Login/LoginForm";
-import ToastNotification from "../components/ToastNotification";
 import { useLogin } from "../hooks/useLogin";
 
 const LoginUser = () => {
@@ -11,7 +10,6 @@ const LoginUser = () => {
     emailError, // Menyertakan error email untuk validasi
     passwordError, // Menyertakan error password untuk validasi
     isProcessing, // Menyertakan status loading,
-    showToast,
     setErrorMessage,
     handleOAuthLogin,
     handleEmailLogin,

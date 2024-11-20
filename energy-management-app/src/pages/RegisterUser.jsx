@@ -1,7 +1,7 @@
 // pages/RegisterPage.js
 import RegisterForm from "../components/Register/RegisterForm";
 import { useRegister } from "../hooks/useRegister";
-import ToastNotification from "../components/ToastNotification";
+
 const RegisterPage = () => {
   const {
     email,
@@ -19,7 +19,7 @@ const RegisterPage = () => {
   } = useRegister();
 
   return (
-    <>
+
       <RegisterForm
         email={email}
         password={password}
@@ -34,7 +34,7 @@ const RegisterPage = () => {
         handlePasswordChange={handlePasswordChange}
         handleDisplayNameChange={handleDisplayNameChange}
       />
-    </>
+ 
   );
 };
 

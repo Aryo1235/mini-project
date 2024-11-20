@@ -90,7 +90,7 @@ const RegisterForm = ({
               size="lg"
               type="submit"
               gradientMonochrome="cyan"
-              isProcessing={isProcessing}
+              isProcessing={isProcessing} // Indikator isProcessing untuk tombol submit
             >
               Register
             </Button>
