@@ -19,6 +19,8 @@ import ProtectedRoute from "../Routes/ProtectedRoutes";
 
 // Footer
 import SimpleFooter from "../components/Footer";
+import LoginPage from "../pages/Login";
+import RegisterUser from "../pages/RegisterPage";
 
 export default function AppRouter() {
   return (
@@ -29,6 +31,8 @@ export default function AppRouter() {
           <Route index element={<LandingPage />} />
           <Route path="login" element={<LoginUser />} />
           <Route path="register" element={<Register />} />
+          <Route path="registeruser" element={<RegisterUser />} />
+          <Route path="loginuser" element={<LoginPage />} />
         </Route>
 
         {/* Routes untuk Home Layout */}
