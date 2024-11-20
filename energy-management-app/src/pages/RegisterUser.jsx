@@ -10,6 +10,7 @@ const RegisterPage = () => {
     errorMessage,
     emailError,
     passwordError,
+    isProcessing,
     showToast,
     setErrorMessage,
     handleRegister,
@@ -19,7 +20,7 @@ const RegisterPage = () => {
   } = useRegister();
 
   return (
-
+    <>
       <RegisterForm
         email={email}
         password={password}
@@ -27,6 +28,7 @@ const RegisterPage = () => {
         errorMessage={errorMessage}
         emailError={emailError}
         passwordError={passwordError}
+        isProcessing={isProcessing}
         showToast={showToast}
         setErrorMessage={setErrorMessage}
         handleRegister={handleRegister}
@@ -34,7 +36,7 @@ const RegisterPage = () => {
         handlePasswordChange={handlePasswordChange}
         handleDisplayNameChange={handleDisplayNameChange}
       />
- 
+    </>
   );
 };
 

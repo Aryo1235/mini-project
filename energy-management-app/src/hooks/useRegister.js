@@ -46,7 +46,7 @@ export const useRegister = () => {
 
     setisProcessing(true); // Set isProcessing saat proses registrasi dimulai
 
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
