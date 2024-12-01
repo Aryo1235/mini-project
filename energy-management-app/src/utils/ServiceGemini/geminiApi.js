@@ -13,15 +13,16 @@ export const getGeminiResponse = async (apiKey, prompt, chatHistory) => {
         { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT },
       ],
       generationConfig: {
-        maxOutputTokens: 400,
+        maxOutputTokens: 200,
         temperature: 0.8,
       },
     });
 
     // Mulai sesi chat menggunakan riwayat chat yang ada
     const chat = model.startChat({ history: chatHistory });
+    console.log(chat);
     const result = await chat.sendMessageStream(prompt);
-
+    console.log(result);
     // Gabungkan hasil stream menjadi teks utuh
     let aiResponse = "";
     for await (const chunk of result.stream) {
