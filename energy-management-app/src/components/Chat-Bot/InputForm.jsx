@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { Textarea, Button } from "flowbite-react"; // Import Flowbite React components
-
+import { HiPaperAirplane } from "react-icons/hi";
 const InputForm = ({
   prompt,
   setPrompt,
@@ -30,28 +30,29 @@ const InputForm = ({
   }, [prompt]);
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+    <form
+      onSubmit={handleSubmit}
+      className="flex items-center mx-auto bg-gray-100 p-3 rounded-lg shadow-md space-x-2 h-13 w-full max-w-3xl"
+    >
       <Textarea
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="Tulis pertanyaan Anda"
-        disabled={loading}
-        rows="1"
         ref={inputRef}
-        className="focus:ring-2 focus:ring-blue-500 resize-none" // Flowbite Tailwind styles
-      />
-
-      <Button
-        type="submit"
+        rows={1}
+        placeholder="Ask Something..."
         disabled={loading}
-        className=" w-full"
-        outline
-        gradientMonochrome="cyan"
-        size="lg"
+        className="flex-1 justify-center resize-none border-none bg-gray-100 text-gray-800 focus:outline-none focus:ring-0"
+      ></Textarea>
+
+      <button
+        type="submit"
+        className=" rounded-lg bg-transparent text-black"
+        size="md"
+        disabled={loading}
       >
-        {loading ? "Generating..." : "Submit"}
-      </Button>
+        {loading ? "..." : <HiPaperAirplane size={24} />}
+      </button>
     </form>
   );
 };

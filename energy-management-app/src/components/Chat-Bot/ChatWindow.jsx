@@ -3,23 +3,23 @@ import ReactMarkdown from "react-markdown";
 
 const ChatWindow = ({ chatHistory, loading }) => {
   return (
-    <div className="flex flex-col space-y-4 h-80 overflow-y-auto border-2 border-gray-300 rounded-lg p-4 mb-4">
+    <div className="flex flex-col space-y-4 h-96 overflow-y-auto  rounded-lg p-4 mb-4 bg-white">
       {chatHistory.length === 0 && !loading ? (
         <p className="text-center text-gray-500">
-          Silahkan kirim pertanyaan tentang energi!
+          Silahkan kirim pertanyaan tentang destinasi!
         </p>
       ) : (
         chatHistory.map((chat, index) => (
           <div key={index}>
             {chat.role === "user" ? (
-              <div className="text-right text-gray-700 whitespace-pre-wrap mb-2 break-words">
-                <p className="bg-blue-200 p-2 rounded-lg inline-block max-w-full text-left break-words">
+              <div className="flex justify-end">
+                <p className="bg-blue-500 text-white p-3 rounded-xl rounded-tr-none max-w-3xl text-md break-words">
                   {chat.parts[0].text}
                 </p>
               </div>
             ) : (
-              <div className="text-left text-gray-700 whitespace-pre-wrap">
-                <div className="bg-green-200 p-2 rounded-lg inline-block">
+              <div className="flex justify-start">
+                <div className="bg-gray-100 text-gray-800 p-3 rounded-xl rounded-tl-none max-w-3xl text-sm break-words">
                   <ReactMarkdown>{chat.parts[0].text}</ReactMarkdown>
                 </div>
               </div>
